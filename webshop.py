@@ -1,11 +1,4 @@
 # -*- coding: utf-8 -*-
-'''
-    website
-
-    :copyright: (c) 2013-2015 by Openlabs Technologies & Consulting (P) Ltd.
-    :license: GPLv3, see LICENSE for more details
-
-'''
 import os
 
 from flask.helpers import send_from_directory

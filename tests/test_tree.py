@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-    Test Tree
-
-    :copyright: (c) 2015 by Openlabs Technologies & Consulting (P) Limited
-    :license: BSD, see LICENSE for more details.
-"""
 from test_base import BaseTestCase
 from trytond.tests.test_tryton import USER, DB_NAME, CONTEXT
 from trytond.transaction import Transaction

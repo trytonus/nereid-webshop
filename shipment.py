@@ -1,11 +1,4 @@
 # -*- coding: utf-8 -*-
-'''
-    shipment
-
-    :copyright: (c) 2014 by Openlabs Technologies & Consulting (P) Ltd.
-    :license: GPLv3, see LICENSE for more details
-
-'''
 from trytond.model import ModelView, Workflow
 from trytond.pool import PoolMeta
 

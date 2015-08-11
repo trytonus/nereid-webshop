@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-    Invoice
-
-    :copyright: (c) 2014 by Openlabs Technologies & Consulting (P) Limited
-    :license: GPLv3, see LICENSE for more details.
-"""
 import tempfile
 from trytond.pool import PoolMeta, Pool
 from nereid import route, login_required, abort, \

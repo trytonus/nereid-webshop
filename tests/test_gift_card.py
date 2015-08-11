@@ -1,9 +1,3 @@
-"""
-    Test Gift Card
-
-    :copyright: (c) 2014-2015 by Openlabs Technologies & Consulting (P) LTD
-    :license: GPLv3, see LICENSE for more details
-"""
 import os
 import unittest
 from decimal import Decimal

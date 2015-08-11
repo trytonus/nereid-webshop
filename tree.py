@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-'''
-    Tree Node
-
-    :copyright: (c) 2015 by Openlabs Technologies & Consulting (P) Ltd.
-    :license: GPLv3, see LICENSE for more details
-'''
 from trytond.pool import PoolMeta
 from trytond.model import fields
 

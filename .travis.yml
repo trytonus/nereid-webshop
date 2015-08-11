@@ -11,6 +11,3 @@ env:
   - TOXENV=packaging
 after_success:
   coveralls
-notifications:
-  email:
-    - ci-notify@openlabs.co.in

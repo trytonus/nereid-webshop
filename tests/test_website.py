@@ -1,10 +1,3 @@
-'''
-
-    Test Website
-
-    :copyright: (c) 2014-2015 by Openlabs Technologies & Consulting (P) LTD
-    :license: GPLv3, see LICENSE for more details
-'''
 import json
 
 from trytond.tests.test_tryton import POOL, USER, DB_NAME, CONTEXT

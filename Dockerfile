@@ -2,8 +2,8 @@
 #
 # VERSION	3.4.0.1
 
-FROM openlabs/tryton:3.4
-MAINTAINER Prakash Pandey <prakash.pandey@openlabs.co.in>
+FROM fulfilio/tryton:3.4
+MAINTAINER Prakash Pandey <prakash.pandey@fulfil.io>
 
 RUN apt-get -y update
 

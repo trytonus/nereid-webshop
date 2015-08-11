@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-    CSS Testing
-
-    :copyright: (C) 2014 by Openlabs Technologies & Consulting (P) Limited
-    :license: BSD, see LICENSE for more details.
-"""
 from os.path import join
 from cssutils import CSSParser
 
