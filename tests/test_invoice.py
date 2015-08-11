@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-    Invoice test suite
-
-    :copyright: (C) 2014 by Openlabs Technologies & Consulting (P) Limited
-    :license: BSD, see LICENSE for more details.
-"""
 import unittest
 import trytond.tests.test_tryton
 from trytond.tests.test_tryton import POOL, USER, DB_NAME, CONTEXT

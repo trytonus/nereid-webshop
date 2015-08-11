@@ -1,7 +1,4 @@
 #!/usr/bin/env python
-# This file is part of Tryton and Nereid.
-# The COPYRIGHT file at the top level of
-# this repository contains the full copyright notices and license terms.
 import ConfigParser
 import os
 import re
@@ -88,12 +85,12 @@ class PostgresTest(Command):
 
 MODULE2PREFIX = {
     'nereid_wishlist': 'openlabs',
-    'gift_card': 'openlabs',
+    'gift_card': 'fio',
     'product_variant_name': 'openlabs',
 }
 
 MODULE = "nereid_webshop"
-PREFIX = "openlabs"
+PREFIX = "fio"
 
 config = ConfigParser.ConfigParser()
 config.readfp(open('tryton.cfg'))
@@ -126,14 +123,14 @@ setup(
     name='%s_%s' % (PREFIX, MODULE),
     version=info.get('version'),
     description="Nereid Webshop",
-    author="Openlabs Technologies & consulting (P) Limited",
-    author_email='info@openlabs.co.in',
-    url='http://www.openlabs.co.in',
+    author="Fulfil.IO Inc.",
+    author_email='support@fulfil.io',
+    url='https://www.fulfil.io',
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Plugins',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+        'License :: OSI Approved :: BSD License',
         'Natural Language :: English',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
@@ -155,7 +152,7 @@ setup(
         list(get_files("templates/")) +
         list(get_files("static/")),
     },
-    license='GPL-3',
+    license='BSD',
     install_requires=requires,
     zip_safe=False,
     entry_points="""
@@ -166,7 +163,7 @@ setup(
     test_loader='trytond.test_loader:Loader',
     tests_require=[
         'pycountry',
-        get_required_version('openlabs_payment_gateway_authorize_net'),
+        get_required_version('fio_payment_gateway_authorize_net'),
         get_required_version('openlabs_nereid_catalog_variants'),
         'cssutils',
     ],

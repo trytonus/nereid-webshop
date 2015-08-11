@@ -1,11 +1,4 @@
 # -*- coding: utf-8 -*-
-'''
-    product
-
-    :copyright: (c) 2014 by Openlabs Technologies & Consulting (P) Ltd.
-    :license: GPLv3, see LICENSE for more details
-
-'''
 from decimal import Decimal
 
 from trytond.pool import Pool, PoolMeta

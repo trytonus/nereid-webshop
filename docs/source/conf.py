@@ -47,7 +47,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Nereid Webshop'
-copyright = u'2014, Openlabs Technologies and Consulting (P) Ltd.'
+copyright = u'2014, Fulfil.IO Inc.'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -200,7 +200,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
   ('index', 'NereidWebshop.tex', u'Nereid Webshop Documentation',
-   u'Openlabs Technologies and Consulting (P) Ltd.', 'manual'),
+   u'Fulfil.IO Inc.', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -230,7 +230,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'nereidwebshop', u'Nereid Webshop Documentation',
-     [u'Openlabs Technologies and Consulting (P) Ltd.'], 1)
+     [u' Fulfil.IO Inc.'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -244,7 +244,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index', 'NereidWebshop', u'Nereid Webshop Documentation',
-   u'Openlabs Technologies and Consulting (P) Ltd.', 'NereidWebshop', 'One line description of project.',
+   u' Fulfil.IO Inc.', 'NereidWebshop', 'One line description of project.',
    'Miscellaneous'),
 ]
 

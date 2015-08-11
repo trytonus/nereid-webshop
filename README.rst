@@ -1,12 +1,6 @@
 nereid-webshop
 ==============
 
-.. image:: https://travis-ci.org/openlabs/nereid-webshop.png?branch=develop
-    :target: https://travis-ci.org/openlabs/nereid-webshop
-
-.. image:: https://coveralls.io/repos/openlabs/nereid-webshop/badge.png?branch=develop
-    :target: https://coveralls.io/r/openlabs/nereid-webshop
-
 Full Webshop based on Tryton Nereid
 
 
@@ -35,7 +29,7 @@ Step 2: Clone and Setup the module
 ```````````````````````````````````
 ::
 
-  git clone git@github.com:openlabs/nereid-webshop.git
+  git clone git@github.com:fulfilio/nereid-webshop.git
   cd nereid-webshop
   python setup.py install
   
