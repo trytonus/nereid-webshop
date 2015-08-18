@@ -29,11 +29,10 @@
               {% if banner.type == 'custom_code' %}
                 {{ banner.custom_code|safe }}
               {% else %}
+                {# type is 'media' #}
                 <a href="{% if banner.click_url %}{{ banner.click_url }} {% endif%}">
-                  {% if banner.type == 'image' %}
+                  {% if banner.file.mimetype.startswith("image") %}
                   <img src="{{ banner.file.url }}" class="margin-auto" alt="{{ banner.alternative_text }}">
-                  {% elif banner.type == 'remote_image' %}
-                  <img src="{{ banner.remote_image_url }}" class="margin-auto" alt="{{ banner.alternative_text }}">
                   {% endif %}
                   <div class="carousel-caption">
                     <h4>{{ banner.name }}</h4>
