@@ -648,7 +648,7 @@ li.google-plus a:hover, li.google a:active{
  padding: 10px 0 10px 20px !important;
 
 }
-@media(max-width: 768px){
+@media(max-width: 767px){
   .modal-dialog{
     width: 100%;
   }
