@@ -81,8 +81,9 @@
                 </div>
                 {% endif %}
                 <div class="checkbox">
-                  {{ payment_form.use_shipment_address }}
-                  <label for="use_shipment_address">{{ _('Use shipping address as billing address') }}</label>
+                  <label for="use_shipment_address">
+                    {{ payment_form.use_shipment_address }} {{ _('Use shipping address as billing address') }}
+                  </label>
                 </div>
               </div>
               <button type="submit" class="btn btn-warning btn-lg btn-block" id="payment-btn">
