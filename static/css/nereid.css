@@ -1,0 +1,19 @@
+/* STICKY NITIFICATION */
+#top-sticky-notification {
+  display: none;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  background: #357ebd;
+  color: white;
+  font-weight: 600;
+  padding: 2px auto;
+  margin: 0;
+  z-index: 99999;
+}
+
+#top-sticky-notification a, #top-sticky-notification a:hover {
+  color: white;
+  text-decoration: underline;
+}

@@ -22,7 +22,7 @@
 
 <html lang="{{ request.nereid_language.code }}">
   <head>
-    <title>{% block title %}{% trans %}Nereid Webshop{% endtrans %}{% endblock title %}</title>  
+    <title>{% block title %}{% trans %}Nereid Webshop{% endtrans %}{% endblock title %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="description" content="{% block meta_description %}{% endblock %}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -42,6 +42,7 @@
     <link rel="stylesheet" type="text/css" href="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='css/font-awesome.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='css/pnotify.custom.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='css/jquery.bxslider.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='css/nereid.css') }}">
     {% endblock link_tags %}
 
     {% block base_stylesheet %}
@@ -199,10 +200,6 @@
                 </li>
                 <li class="my-cart">
                   <a href="" class="my-cart-show">{{ _('My Cart') }} <span class="quantity">0</span></a>
-                </li>
-                <li class="hidden cart-message">
-                  <div class="cart-add-msg">
-                  </div>
                 </li>
               </ul>
             </div>
@@ -376,15 +373,9 @@
         </div>
       </div>
     </footer>
-    <script type="text/html"  id='cart-message'>
-      <div class="col-sm-5">
-        <img class="img-responsive" src="<%= line.image %>" >
-      </div>
-      <div class="col-sm-7">
-        <p><%= line.display_name %> <br> added to your cart</p>
-      </div>
+    <script type="text/html"  id='cart-message'><strong><%= line.display_name %></strong>
+      added to your cart. <a href="{{ url_for('nereid.cart.view_cart') }}">checkout</a>
     </script>
-    
     <script type="text/html"  id='cart-html-append'>
 
       <a href="{{ url_for('nereid.cart.view_cart') }}" class="my-cart-show">{{ _('My Cart') }} <span class="quantity"><%= parseInt(user_status.cart_size) %></span></a>
@@ -443,6 +434,7 @@
     <script src="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='js/imagesloaded.pkgd.min.js') }}"></script>
     <script src="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='js/typeahead.bundle.min.js') }}"></script>
     <script src="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='js/jquery.bxslider.min.js') }}"></script>
+    <script src="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='js/nereid.js') }}"></script>
     {% block script_tags %}
       {#
         use this block for additional script tags which can be replaced by downstream modules if they dont use
@@ -537,7 +529,7 @@
             }
         });
       }
-      
+
       function updatedCart(){
         $.post("{{ url_for('nereid.website.user_status') }}", function(data){
           var template = $("#cart-html-append").html();
@@ -618,6 +610,8 @@
         var qty_element = $(this).siblings("input[name='quantity']");
         var product_element = $(this).siblings("input[name='product']");
         var new_quantity = parseInt(qty_element.val());
+        var template = $("#cart-message").html();
+
         $.ajax({
           type: "POST",
           url: "{{ url_for('nereid.cart.add_to_cart') }}",
@@ -625,11 +619,11 @@
         })
         .done(function(result){
           updatedCart();
-          if (result.line){
-            $(".cart-message").removeClass("hidden").show();
-            var template = $("#cart-message").html();
-            $(".cart-add-msg").html(_.template(template, {'line': result.line}));
-            $(".cart-message").removeClass("hidden").show().delay(3000).fadeOut();
+          if (result.line) {
+            notify({
+              style: 'top_sticky',
+              message: _.template(template, {'line': result.line})
+            });
           }
         })
         .fail(function (result){

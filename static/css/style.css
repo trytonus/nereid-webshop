@@ -3,6 +3,7 @@ body{
   font-family: 'Open Sans', Helvetica, Arial, FreeSans;
   font-weight: 400;
   color: #373435;
+  cursor: default;
 }
 html, html a {
   -webkit-font-smoothing: antialiased;
