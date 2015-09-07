@@ -648,7 +648,7 @@ li.google-plus a:hover, li.google a:active{
  padding: 10px 0 10px 20px !important;
 
 }
-@media(max-width: 768px){
+@media(max-width: 767px){
   .modal-dialog{
     width: 100%;
   }
@@ -1506,6 +1506,10 @@ border-top: 1px solid rgba(248, 248, 248, 0.2);
 .payment-container .table-responsive .col-xs-8{
   border-left: 1px solid #eee;
   padding-top: 15px;
+}
+.payment-container label {
+  font-weight: 600;
+  font-size: 15px;
 }
 #email-in-use .email-in-use-body .col-md-5{
   text-align: center;
