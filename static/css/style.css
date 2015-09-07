@@ -1507,6 +1507,10 @@ border-top: 1px solid rgba(248, 248, 248, 0.2);
   border-left: 1px solid #eee;
   padding-top: 15px;
 }
+.payment-container label {
+  font-weight: 600;
+  font-size: 15px;
+}
 #email-in-use .email-in-use-body .col-md-5{
   text-align: center;
   border: 1px solid #eee;
