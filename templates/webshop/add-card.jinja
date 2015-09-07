@@ -67,12 +67,13 @@
 
     $('#save-card-btn').on('click', function(ev){
       if($(".address_panel input:checked").length == 0){
-          $.pnotify({
+          new PNotify({
             title: 'message',
             text: 'Please Select Billing Address to continue',
-            history: false,
-            nonblock: true,
-            nonblock_opacity: .4
+            nonblock: {
+              nonblock: true,
+              nonblock_opacity: .4
+            }
           });
         ev.preventDefault();
       }
