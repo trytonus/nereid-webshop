@@ -167,13 +167,14 @@
         url: $(this).data('url'),
         data: $('#add-comment-form').serialize(),
       }).success(function(data) {
-          $.pnotify({
+          new PNotify({
             title: 'message',
             text: data.message,
-            history: false,
-            nonblock: true,
+            nonblock: {
+              nonblock: true,
+              nonblock_opacity: .4
+            },
             delay:2000,
-            nonblock_opacity: .4,
             animation: 'show'
           });
         $('.add-comment').html('<h5><span class="text-muted">Note: </span>' + data.comment +'</h5>');

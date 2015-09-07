@@ -198,13 +198,14 @@
         url: "{{ url_for('wishlist.wishlist.wishlist_product') }}",
         data: data,
       }).done(function(){
-        $.pnotify({
+        new PNotify({
             title: 'message',
             text: 'Product Added to your Default wishlist!',
-            history: false,
-            nonblock: true,
+            nonblock: {
+              nonblock: true,
+              nonblock_opacity: .4
+            },
             delay:2000,
-            nonblock_opacity: .4,
             animation: 'show'
           });
       });
