@@ -373,6 +373,9 @@
         </div>
       </div>
     </footer>
+    {% endblock footer %}
+
+    {% block _templates %}
     <script type="text/html"  id='cart-message'><strong><%= line.display_name %></strong>
       added to your cart. <a href="{{ url_for('nereid.cart.view_cart') }}">checkout</a>
     </script>
@@ -420,7 +423,7 @@
         <% } %>
       </div>
     </script>
-    {% endblock footer %}
+    {% endblock _templates %}
 
     <!-- javascript section -->
 
