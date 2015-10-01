@@ -17,7 +17,7 @@
       {% endif %}
     {% endblock sale_confirmation %}
 
-      {% if not current_user.is_anonymous() %}
+      {% if not current_user.is_anonymous %}
         {{ account_header(_('My Account / Order #') + sale.reference, 'orders') }}
         <div class="col-md-10 no-pad-xs">
       {% else %}

@@ -14,7 +14,7 @@
       <div class="delivery-address">
         <div class="col-md-7 col-sm-7 col-xs-12">
           <div class="address-container">
-            {% if not current_user.is_anonymous() and addresses %}
+            {% if not current_user.is_anonymous and addresses %}
             <h4><span class="underline">{{ _('Choose an existing Shipping Address') }}</span></h4>
             <div class="row">
               {% for address in addresses %}

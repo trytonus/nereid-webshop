@@ -129,7 +129,7 @@
                       {% endif %}
                     </li>
                     <li>
-                      {% if not current_user.is_anonymous() %}
+                      {% if not current_user.is_anonymous %}
                       <span class="text-muted">Welcome, </span> <span >{{ request.nereid_user.display_name }}</span>
                       <a href="{{ url_for('nereid.website.logout') }}"><span class="text-danger"><i class="fa fa-sign-out"></i> Log Out</span>
                       </a>
@@ -170,7 +170,7 @@
                     </a>
                     <ul class="dropdown-menu" role="menu">
                     {% block render_account_menu %}
-                      {% if not current_user.is_anonymous() %}
+                      {% if not current_user.is_anonymous %}
                       {% block registered_menu %}
                         <li><a href="{{ url_for('nereid.website.account') }}">
                         <i class="fa fa-user"></i>&nbsp;&nbsp;{{ _('Profile') }}
@@ -676,7 +676,7 @@
       ga('create', {
         trackingId: '{{ GOOGLE_ANALYTICS_PROPERTY_ID }}',
         cookieDomain: 'auto'
-        {% if not current_user.is_anonymous() %}
+        {% if not current_user.is_anonymous %}
         ,userId: {{ current_user.id }}
         {% endif %}
       });
