@@ -181,7 +181,7 @@
               <input type="hidden" name="action" value="add"/>
               <input type="hidden" name="product" value="{{ product.id }}" />
               <div class="btn-group btn-block ">
-                {% if current_user.is_authenticated() %}
+                {% if current_user.is_authenticated %}
                 <button type="submit" class="btn btn-link wishlist_button_nopop">Add To Wishlist</button>
                 {% else %}
                 {# Guest user can't add any product to a wishlist, so asking user for login and redirecting back to same page #}

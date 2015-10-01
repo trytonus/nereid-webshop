@@ -157,17 +157,17 @@ class Product:
                 'recipient_name': form.recipient_name.data,
                 'message': form.message.data,
             }
-            values.update(SaleLine(**values).on_change_product())
+            order_line = SaleLine(**values)
+            order_line.on_change_product()
 
             # Here 0 means the default option to enter open amount is
             # selected
             if form.selected_amount.data != 0:
-                values.update({'gc_price': form.selected_amount.data})
-                values.update(SaleLine(**values).on_change_gc_price())
+                order_line.gc_price = form.selected_amount.data
+                order_line.on_change_gc_price()
             else:
-                values.update({'unit_price': Decimal(form.open_amount.data)})
+                order_line.unit_price = Decimal(form.open_amount.data)
 
-            order_line = SaleLine(**values)
             order_line.save()
 
             message = 'Gift Card has been added to your cart'
