@@ -110,14 +110,14 @@ class TestWebsite(BaseTestCase):
             template, = self.Template.create([{
                 'name': 'TestProduct',
                 'type': 'goods',
-                'list_price': Decimal('100'),
-                'cost_price': Decimal('100'),
                 'default_uom': uom.id,
             }])
             product, = self.Product.create([{
                 'template': template.id,
                 'displayed_on_eshop': True,
                 'uri': 'test-product',
+                'list_price': Decimal('100'),
+                'cost_price': Decimal('100'),
             }])
 
             with app.test_request_context('/'):
