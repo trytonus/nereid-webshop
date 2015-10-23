@@ -154,7 +154,8 @@
             <div class="col-md-3 col-sm-3 col-xs-12">
               <div class="main-logo">
                 <a href="{{ url_for('nereid.website.home') }}">
-                  <img src="{{ LOGO }}">
+                  {% set company_logo=request.nereid_website.company.logo %}
+                  <img src="{{ company_logo and company_logo.transform_command().resize(170, 57, 'a') or LOGO }}">
                 </a>
               </div>
             </div>
