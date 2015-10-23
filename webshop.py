@@ -9,7 +9,7 @@ from trytond.pyson import Eval, Not
 
 __metaclass__ = PoolMeta
 __all__ = [
-    'WebShop', 'BannerCategory', 'Banner', 'Article',
+    'Company', 'WebShop', 'BannerCategory', 'Banner', 'Article',
     'Website', 'ArticleCategory', 'MenuItem'
 ]
 
@@ -20,6 +20,12 @@ STATIC_FOLDER = os.path.join(
         os.path.dirname(__file__)
     ), 'static'
 )
+
+
+class Company:
+    __name__ = "company.company"
+
+    logo = fields.Many2One("nereid.static.file", "Logo", select=True)
 
 
 class WebShop(ModelSQL):

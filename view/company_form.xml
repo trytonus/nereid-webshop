@@ -1,0 +1,6 @@
+<data>
+    <xpath expr="/form/field[@name='currency']" position="after">
+        <label name="logo"/>
+        <field name="logo"/>
+    </xpath>
+</data>
