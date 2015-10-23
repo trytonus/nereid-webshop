@@ -165,7 +165,7 @@ setup(
     tests_require=[
         'pycountry',
         get_required_version('fio_payment_gateway_authorize_net'),
-        get_required_version('openlabs_nereid_catalog_variants'),
+        get_required_version('fio_nereid_catalog_variants'),
         'cssutils',
     ],
     cmdclass={
