@@ -32,15 +32,15 @@ class TestGiftCard(BaseTestCase):
         values = {
             'name': 'product',
             'type': type,
-            'list_price': Decimal('20'),
-            'cost_price': Decimal('5'),
             'default_uom': uom.id,
             'salable': True,
             'sale_uom': uom.id,
             'account_revenue': self._get_account_by_kind('revenue').id,
         }
         product_values = {
-            'code': 'Test Product'
+            'code': 'Test Product',
+            'list_price': Decimal('20'),
+            'cost_price': Decimal('5'),
         }
 
         if is_gift_card:
