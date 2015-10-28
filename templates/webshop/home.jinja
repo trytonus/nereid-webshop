@@ -70,7 +70,11 @@
               <div class="slide">
                 <a href="{{ child.link }}">
                   <img class="img img-responsive margin-auto"
-                  src="{{ CDN + url_for('nereid.webshop.send_static_file', filename='images/no-image.jpg') }}"
+                    {% if child.image %}
+                      src="{{ CDN }}{{ child.image.transform_command().thumbnail(400, 400, 'a') }}"
+                    {% else %}
+                      src="{{ CDN + url_for('nereid.webshop.send_static_file', filename='images/no-image.jpg') }}"
+                    {% endif %}
                   alt="{{ child.title }}" title="{{ child.title }}">
                 </a>
               </div>
