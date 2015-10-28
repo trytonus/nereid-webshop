@@ -6,6 +6,9 @@ from wtforms.validators import ValidationError
 from nereid import abort
 
 from trytond.pool import Pool
+from nereid.contrib.locale import make_lazy_gettext
+
+_ = make_lazy_gettext('nereid_webshop')
 
 
 class GiftCardForm(Form):
@@ -49,7 +52,7 @@ class GiftCardForm(Form):
     def fill_choices(self):
         choices = []
         if self.gc_product.allow_open_amount:
-            choices = [(0, 'Set my Own')]
+            choices = [(0, _('Set my Own'))]
 
         self.selected_amount.choices = choices + [
             (p.id, p.price) for p in self.gc_product.gift_card_prices
@@ -63,7 +66,7 @@ class GiftCardForm(Form):
             form.gc_product.gc_min <= field.data <= form.gc_product.gc_max
         ):
             raise ValidationError(
-                "Amount between %s and %s is allowed." % (
-                    form.gc_product.gc_min, form.gc_product.gc_max
+                _('Amount between {gc_min} and {gc_max} is allowed.').format(
+                    gc_min=form.gc_product.gc_min, gc_max=form.gc_product.gc_max
                 )
             )

@@ -1,12 +1,12 @@
 {% extends 'base.jinja' %}
 
-{% block title %}Return Item {{ super() }}{% endblock %}
+{% block title %}{{ _('Return Item') }}{{ super() }}{% endblock %}
 
 {% block main %}
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h4>Return Item</h4>
+      <h4>{{ _('Return Item') }}</h4>
     </div>
   </div>
   <div class="row margin-top-15">
@@ -15,10 +15,10 @@
         <thead>
           <tr>
             <th></th>
-            <th>Product</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>SubTotal</th>
+            <th>{{ _('Product') }}</th>
+            <th>{{ _('Price') }}</th>
+            <th>{{ _('Quantity') }}</th>
+            <th>{{ _('SubTotal') }}</th>
           </tr>
         </thead>
         <tbody>
@@ -34,7 +34,7 @@
             {{ line.product.name }}
             <br>
             {% if line.product.code %}
-              <strong>SKU:</strong>{{ line.product.code }}
+              <strong>{{ _('SKU:') }}</strong>{{ line.product.code }}
             {% endif %}
             </td>
             <td>{{ line.unit_price|currencyformat(line.sale.currency.code) }}</td>
@@ -53,15 +53,15 @@
               <table class="table text-right table-borderless">
                 <tbody>
                   <tr>
-                    <td>Order No.:</td>
-                    <td><a href="{{ url_for('sale.sale.render', active_id=line.sale.id) }}" class="text-info">#{{ line.sale.reference }}</a></td>
+                    <td>{{ _('Order No.:') }}</td>
+                    <td><a href="{{ url_for('sale.sale.render', active_id=line.sale.id) }}" class="text-info">{{ _('#') }} {{ line.sale.reference }}</a></td>
                   </tr>
                   <tr>
-                    <td>Date:</td>
+                    <td>{{ _('Date:') }}</td>
                     <td>{{ line.sale.sale_date|dateformat }}</td>
                   </tr>
                   <tr>
-                    <td>Total Refund:</td>
+                    <td>{{ _('Total Refund:') }}</td>
                     <td>{{ line.amount|currencyformat(line.sale.currency.code) }}</td>
                   </tr>
                 </tbody>
@@ -80,13 +80,13 @@
         <div class="form-group">
           <div class="row">
             <div class="col-md-12">
-              <h4>Why do you want to return this item?</h4>
+              <h4>{{ _('Why do you want to return this item?') }}</h4>
             </div>
           </div>
           <div class="row">
             <div class="col-md-6">
               <select name="reason" class="form-control" id="return-reason" required>
-                <option value="0">Choose a reason</option>
+                <option value="0">{{ _('Choose a reason') }}</option>
                 {% for reason in reasons %}
                 <option value={{ reason.id }}>{{ reason.name }}</option>
                 {% endfor %}
@@ -102,19 +102,19 @@
           </div>
           <div class="row" id="comment-section" hidden>
             <div class="col-md-12">
-              <h4>Comment</h4>
+              <h4>{{ _('Comment') }}</h4>
             </div>
             <div class="col-md-6">
               <textarea
               name="comment" class="form-control" maxlength="200" rows="3"
-              id="return-comment" placeholder="Please enter your comment."
+              id="return-comment" placeholder={{ _('Please enter your comment') }}
               ></textarea>
             </div>
           </div>
           <div class="row margin-top-15">
             <div class="col-md-3">
               <button class="btn btn-primary btn-block" type="submit" id="return-btn" disabled>
-                Return
+                {{ _('Return') }}
               </button>
             </div>
           </div>

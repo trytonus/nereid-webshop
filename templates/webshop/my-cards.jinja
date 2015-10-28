@@ -21,7 +21,7 @@
               <form name="remove-payment-profile" action="{{ url_for('party.party.remove_payment_profile') }}" method="post" autocomplete="off">
                 <input name="csrf_token" type="hidden" value="{{ csrf_token() }}"/>
                 <input type="hidden" name="profile_id" value="{{ card.id }}"/>
-                <button type="submit" class="pull-right btn btn-link"><i class="fa fa-trash-o"></i> Remove</button>
+                <button type="submit" class="pull-right btn btn-link"><i class="fa fa-trash-o"></i> {{ _('Remove') }}</button>
               </form>
               {{ render_payment_profile(card) }}
             </div>

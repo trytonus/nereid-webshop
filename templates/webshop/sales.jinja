@@ -9,14 +9,25 @@
     <div class="filter-by hidden-sm hidden-xs">
       <div class="dropdown pull-right">
         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-          {% if request.args.get('filter_by') %}Filtered by {{ request.args.get('filter_by')|title }} orders {% else %} Filter by orders state {% endif %}
+          {% if request.args.get('filter_by') == 'recent' %}
+            {% set order_state = _('Recent orders') %}
+          {% elif request.args.get('filter_by') == 'done' %}
+            {% set order_state = _('Done orders') %}
+          {% elif request.args.get('filter_by') == 'canceled' %}
+            {% set order_state = _('Canceled orders') %}
+          {% elif request.args.get('filter_by') == 'archived' %}
+            {% set order_state = _('Archived orders') %}
+          {% else %}
+            {% set order_state = '' %}
+          {% endif %}
+          {% if request.args.get('filter_by') %}{{ _('Filtered by') }} {{ order_state }} {% else %} {{ _('Filter by orders state') }}{% endif %}
           <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ url_for('sale.sale.render_list', filter_by="recent") }}">Recent Orders</a></li>
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ url_for('sale.sale.render_list', filter_by="done") }}">Done Orders</a></li>
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ url_for('sale.sale.render_list', filter_by="canceled") }}">Canceled Orders</a></li>
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ url_for('sale.sale.render_list', filter_by="archived") }}">Archived Orders</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ url_for('sale.sale.render_list', filter_by="recent") }}">{{ _('Recent Orders') }}</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ url_for('sale.sale.render_list', filter_by="done") }}">{{ _('Done Orders') }}</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ url_for('sale.sale.render_list', filter_by="canceled") }}">{{ _('Canceled Orders') }}</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ url_for('sale.sale.render_list', filter_by="archived") }}">{{ _('Archived Orders') }}</a></li>
         </ul>
       </div>
     </div>
@@ -46,7 +57,7 @@
                           {{ _('Order No.') }}
                         </div>
                         <div class="col-md-8 col-sm-8 col-xs-12">
-                          <a href="{{ url_for('sale.sale.render', active_id=sale.id) }}" class="text-info">#{{ sale.reference }}</a>
+                          <a href="{{ url_for('sale.sale.render', active_id=sale.id) }}" class="text-info">{{ _('#') }}{{ sale.reference }}</a>
                         </div>
                       </div>
                     </div>
@@ -58,11 +69,11 @@
                       </div>
                       <div class="secondry">
                         {% if sale.state ==  "done" %}
-                        <span class="text-success">Done</span>
+                        <span class="text-success">{{ _('Done') }}</span>
                         {% elif sale.state in ("processing", "confirmed") %}
-                        <span class="text-info">Processing</span>
+                        <span class="text-info">{{ _('Processing') }}</span>
                         {% elif sale.state == "cancel" %}
-                        <span class="text-danger">Canceled</span>
+                        <span class="text-danger">{{ _('Canceled') }}</span>
                         {% endif %}
                       </div>
                     </div>
@@ -122,7 +133,7 @@
     </div>
     {% else %}
     <div class="row">
-      <h4 class="text-muted center">No Orders Available.</h4>
+      <h4 class="text-muted center">{{ _('No Orders Available') }}</h4>
     </div>
     {% endif %}
   </div>

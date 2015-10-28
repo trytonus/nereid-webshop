@@ -28,34 +28,34 @@
           <div class="form-group">
             <div class="row margin-top-15">
                 <div class="col-md-6">
-                    {{ render_field(form.selected_amount, required=required, id="selected_amount") }}
+                  {{ render_field(form.selected_amount, label_text= _('Amount'), required=required, id="selected_amount") }}
                 </div>
                 {% if product.allow_open_amount %}
                     <div class="col-md-6" id="enter_amount">
-                        {{ render_field(form.open_amount, placeholder="Enter Amount") }}
+                      {{ render_field(form.open_amount, label_text= _('Enter Amount'), placeholder=_('0.00')) }}
                     </div>
                 {% endif %}
             </div>
 
             <div class="row margin-top-15">
               <div class="col-md-6">
-                {{ render_field(form.recipient_name, placeholder="Enter Name", type="text") }}
+                {{ render_field(form.recipient_name, label_text= _('Recipient Name'), placeholder=_('Enter Name'), type="text") }}
               </div>
               {% if product.gift_card_delivery_mode in ['virtual', 'combined'] %}
                 <div class="col-md-6">
-                    {{ render_field(form.recipient_email, placeholder="Enter Email", type="email", required=required) }}
+                  {{ render_field(form.recipient_email, label_text= _('Recipient Email'), placeholder=_('Enter Email'), type="email", required=required) }}
                 </div>
               {% endif %}
             </div>
             <div class="row margin-top-15">
               <div class="col-md-12">
-                {{ render_field(form.message, label_text="Message (max. 100 words)", placeholder="Enter Message", type="textarea", maxlength="100") }}
+                {{ render_field(form.message, label_text=_('Message (max. 100 words)'), placeholder=_('Enter Message'), type="textarea", maxlength="100") }}
               </div>
             </div>
             <div class="row margin-top-15">
                 <div class="buy-now col-md-12">
                   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                  <button class="btn btn-buynow btn-block btn-lg" type="submit" id="buy-now-btn">Buy Now</button>
+                  <button class="btn btn-buynow btn-block btn-lg" type="submit" id="buy-now-btn">{{ _('Buy Now') }}</button>
                 </div>
             </div>
           </div>
@@ -63,7 +63,7 @@
       </div>
     {% else %}
       <div style="padding-top:15px;">
-        <span class="text-danger" id="product-not-for-sale"><i class="fa fa-warning"></i>This product is not for sale</span>
+        <span class="text-danger" id="product-not-for-sale"><i class="fa fa-warning"></i>{{ _('This product is not for sale') }}</span>
       </div>
     {% endif %}
   </div>
