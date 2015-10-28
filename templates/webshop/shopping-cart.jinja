@@ -84,13 +84,13 @@
                 <form autocomplete="off">
                   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                   <div class="col-xs-4">
-                    <label for="" class="">Have a Coupon ?</label>
+                    <label for="" class="">{{ _('Have a Coupon ?') }}</label>
                   </div>
                   <div class="col-xs-6">
-                    <input type="text" class="form-control input-sm" id="" placeholder="Enter your coupon code">
+                    <input type="text" class="form-control input-sm" id="" placeholder={{ _('Enter your coupon code') }}>
                   </div>
                   <div class="col-xs-2">
-                  <a class="btn btn-default btn-sm" data-original-title="" title="">Apply</a>
+                  <a class="btn btn-default btn-sm" data-original-title="" title="">{{ _('Apply') }}</a>
                   </div>
                 </form>
               </div>

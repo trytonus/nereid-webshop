@@ -11,8 +11,8 @@
       {% if confirmation %}
         <div class="alert alert-success order-confirmation">
           <i class="fa fa-check-circle"></i>
-          Thank You!<br>
-          <h4>Your Order has been placed successfully.</h4>
+          {{ _('Thank You!') }}<br>
+          <h4>{{ _('Your Order has been placed successfully.') }}</h4>
         </div>
       {% endif %}
     {% endblock sale_confirmation %}
@@ -49,7 +49,7 @@
             <div class="col-md-6">
               <div class="panel panel-default order-payment-panel margin-top-30">
                 <div class="panel-heading">
-                  <h4>Payment Method</h4>
+                  <h4>{{ _('Payment Method') }}</h4>
                 </div>
                 <table class="table">
                 {% for payment in sale.payments %}
@@ -69,19 +69,19 @@
             <div class="col-md-6">
             <div class="panel panel-default order-payment-panel margin-top-30">
                 <div class="panel-heading">
-                  <h4>Order Total</h4>
+                  <h4>{{ _('Order Total') }}</h4>
                 </div>
                 <table class="table">
                   <tr>
-                    <td><strong>Sub Total</strong></td>
+                    <td><strong>{{ _('Sub Total') }}</strong></td>
                     <td>{{ sale.untaxed_amount|currencyformat(sale.currency.code) }}</td>
                   </tr>
                   <tr>
-                    <td><strong>Tax Amount</strong></td>
+                    <td><strong>{{ _('Tax Amount') }}</strong></td>
                     <td>{{ sale.tax_amount|currencyformat(sale.currency.code) }}</td>
                   </tr>
                   <tr>
-                    <td><strong>Total Amount</strong></td>
+                    <td><strong>{{ _('Total Amount') }}</strong></td>
                     <td>{{ sale.total_amount|currencyformat(sale.currency.code) }}</td>
                   </tr>
                 </table>
@@ -146,7 +146,7 @@
                   <button name="save-comment" class="btn btn-primary col-md-3 pull-right margin-top-30" id="add-comment" data-url="{{ url_for('sale.sale.add_comment_to_sale', active_id=sale.id, access_code=sale.guest_access_code) }}">{{ _('Save') }}</button>
               </div>
             {% elif sale.comment %}
-              <h5> <span class="text-muted">Note: </span>&nbsp;{{ sale.comment }}</h5>
+              <h5> <span class="text-muted">{{ _('Note:') }}</span>&nbsp;{{ sale.comment }}</h5>
             {% endif %}
             </div>
           </div>

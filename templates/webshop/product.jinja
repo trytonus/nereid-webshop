@@ -93,7 +93,7 @@
       </h3>
       {% if product.code %}
       <h4>
-        <small class="product-code" itemprop="identifier" content="sku:{{ product.code }}">SKU:{{ product.code }}</small>
+        <small class="product-code" itemprop="identifier" content="sku:{{ product.code }}">{{ _('SKU:') }} {{ product.code }}</small>
       </h4>
       {% endif %}
       {% endblock product_name_price %}
@@ -124,7 +124,7 @@
           {% else %}
             {% if product.template.products_displayed_on_eshop|length > 1 %}
             {# show if there are more variants than the one being displayed #}
-            <div class="product-size row"> Select Variation : <br>
+            <div class="product-size row"> {{ _('Select Variation:') }} <br>
               <div class="size-buttons">
                 {% for variant in product.template.products_displayed_on_eshop %}
                 <a class="btn btn-size"
@@ -132,7 +132,7 @@
                   type="radio" value="{{ variant.id }}">{{ variant.code }}</a>
                 {% endfor %}
               </div>
-              <span class="error-text text-danger"> Please select an option</span>
+              <span class="error-text text-danger"> {{ _('Please select an option') }}</span>
             </div>
             {% endif %}
           {% endif %}
@@ -149,7 +149,7 @@
                 <input type="hidden" name="product" value="{{ product.id }}"/>
                 <input type="hidden" name="action" value="add"/>
                 <button class="btn btn-primary btn-buynow btn-block btn-lg product-buy-now product-{{ product.id }}-buy-now-btn" type="button"{% if not product.can_buy_from_eshop() %}disabled{% endif %}
-                quantity="1" id="buy-now-btn">Add to Cart</button>
+                quantity="1" id="buy-now-btn">{{ _('Add to Cart') }}</button>
               </div>
             </form>
           </div>
@@ -165,7 +165,7 @@
             {% endif %}
           {% else %}
           <div style="padding-top:15px;">
-            <span class="text-danger" id="product-not-for-sale"><i class="fa fa-warning"></i>This product is not for sale</span>
+            <span class="text-danger" id="product-not-for-sale"><i class="fa fa-warning"></i>{{ _('This product is not for sale') }}</span>
           </div>
           {% endif %}
         </div>
@@ -182,15 +182,15 @@
               <input type="hidden" name="product" value="{{ product.id }}" />
               <div class="btn-group btn-block ">
                 {% if current_user.is_authenticated() %}
-                <button type="submit" class="btn btn-link wishlist_button_nopop">Add To Wishlist</button>
+                <button type="submit" class="btn btn-link wishlist_button_nopop">{{ _('Add To Wishlist') }}</button>
                 {% else %}
                 {# Guest user can't add any product to a wishlist, so asking user for login and redirecting back to same page #}
-                <a href="{{ url_for('nereid.website.login', next=request.path) }}" class="btn btn-link wishlist_button_nopop">Add To Wishlist</a>
+                <a href="{{ url_for('nereid.website.login', next=request.path) }}" class="btn btn-link wishlist_button_nopop">{{ _('Add To Wishlist') }}</a>
                 {% endif %}
                 {% if current_user.wishlists|length > 0 %}
                 <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" id="wishlist-dropdown">
                   <i class="fa fa-angle-down"></i>
-                  <span class="sr-only">Toggle Dropdown</span>
+                  <span class="sr-only">{{ _('Toggle Dropdown') }}</span>
                 </button>
                 {# Drop down for add to wishlist #}
                 <ul class="dropdown-menu" role="menu" aria-labelledby="wishlist-dropdown">
@@ -242,7 +242,7 @@
   <!-- Related Products -->
   <div class="{% if cross_sells %} col-md-12 col-sm-12 {% else %} hidden {% endif %} related-prod">
     {# heading for column #}
-    <h4>Related Items</h4>
+    <h4>{{ _('Related Items') }}</h4>
     <div class="row related-product-row text-center">
     {% for related_product in cross_sells %}
     
@@ -264,7 +264,7 @@
           <span class="col-md-12">
           {% if related_product.salable %}
             {% if related_product.is_gift_card %}
-              <a class="btn btn-related-item-add-cart" href="{{ related_product.get_absolute_url() }}">Add to Cart</a>
+              <a class="btn btn-related-item-add-cart" href="{{ related_product.get_absolute_url() }}">{{ _('Add to Cart') }}</a>
             {% else %}
               <form action="{{ url_for("nereid.cart.add_to_cart") }}" method="post" id="product-buy-now" autocomplete="off" class="form-related-inline related-products add-to-cart" data-ga-event-label="Add To Cart Related Product" data-ga-product-name="{{ related_product.name }}" data-ga-product-category="{{ related_product.category and related_product.category.name or None }}" data-ga-product-price="{{ related_product.sale_price()|currencyformat(request.nereid_currency.code) }}">
                 <div class="tooltip-bottom-{{ related_product.id }}">
@@ -273,12 +273,12 @@
                   <input type="hidden" name="size" id="size-id"/>
                   <input type="hidden" name="product" value="{{ related_product.id }}"/>
                   <input type="hidden" name="action" value="add"/>
-                  <button class="btn btn-related-item-add-cart product-buy-now product-{{ related_product.id }}-buy-now-btn" type="button" quantity="1" id="buy-now-btn">Add to Cart</button>
+                  <button class="btn btn-related-item-add-cart product-buy-now product-{{ related_product.id }}-buy-now-btn" type="button" quantity="1" id="buy-now-btn">{{ _('Add to Cart') }}</button>
                 </div>
               </form>
             {% endif %}
           {% else %}
-            <span class="text-danger" id="product-not-for-sale"><i class="fa fa-warning"></i>This product is not for sale</span>
+          <span class="text-danger" id="product-not-for-sale"><i class="fa fa-warning"></i>{{ _('This product is not for sale') }}</span>
           {% endif %}
           </span>
         </div>
@@ -306,7 +306,7 @@
   <div class="col-md-12">
     <% _.each(attrs, function(attr, index) { %>
       <% if (attr.widget == 'dropdown') { %>
-        <div class="form-group"> Select <%= attr.display_name %>: <br/>
+        <div class="form-group"> {{ _('Select') }} <%= attr.display_name %>: <br/>
           <select class="form-control select-sort attribute input-lg" data-attr-id="<%= attr.attribute_id %>">
             <% _.each(attr.options, function(option, index) { %>
             <option value="<%= _.escape(option[0]) %>" <% if (option[0] == currentVariantAttrs[attr.attribute_id]) { %> selected <% } %> ><%= _.escape(option[1]) %></option>

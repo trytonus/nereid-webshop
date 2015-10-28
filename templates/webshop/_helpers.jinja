@@ -54,7 +54,7 @@
   <a href="{{ url_for('product.product.render', uri=product.uri) }}">
     <img src="{{ CDN }}{{ product.default_image }}" alt="{{ product.name }}" title="{{ product.name }}"/>
     <h4> {{ product.name }}
-      <span class="brand">Black Coffee</span>
+      <span class="brand">{{ product.brand.rec_name }}</span>
     </h4>
     {% if product.is_gift_card %}
       <span class="product-price">{{ product.gc_min|currencyformat(request.nereid_currency.code) }} - {{ product.gc_max|currencyformat(request.nereid_currency.code) }}</span>
@@ -95,7 +95,7 @@
     <h5 class="center">
       <a href="{{ product_url }}" ga-product-link data-ga-product-list="{{ node and node.name or product_list_name }}" data-ga-event-label="Product Name" data-ga-product-id="{{ product.id }}" data-ga-product-name="{{ product.name }}" data-ga-product-category="{{ product.category and product.category.name or None }}">{{ name|safe|truncate(50) }}</a>
     </h5>
-    {% if product.brand %}<div class="brand">by {{ product.brand }}</div>{% endif %}
+    {% if product.brand %}<div class="brand">{{ _('by') }} {{ product.brand.rec_name }}</div>{% endif %}
     {% if product.is_gift_card %}
       <h6 class="text-danger center">{{ product.gc_min|currencyformat(request.nereid_currency.code) }} - {{ product.gc_max|currencyformat(request.nereid_currency.code) }}</h6>
     {% else %}
@@ -229,8 +229,8 @@
 
 {% macro render_payment_profile(card) -%}
 <div>
-  <h5>Card owner: {{ card.party.rec_name }} </h5>
-  <h5>Card number: XXXX XXXX XXXX {{ card.last_4_digits }}<h5>
-  <h5>Valid Till: {{ card.expiry_month }}/{{ card.expiry_year }} </h5>
+  <h5>{{ _('Card owner:') }} {{ card.party.rec_name }} </h5>
+  <h5>{{ _('Card number: XXXX XXXX XXXX') }} {{ card.last_4_digits }}<h5>
+  <h5>{{ _('Valid Till:') }} {{ card.expiry_month }}/{{ card.expiry_year }} </h5>
 </div>
 {%- endmacro %}

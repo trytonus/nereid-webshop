@@ -130,8 +130,8 @@
                     </li>
                     <li>
                       {% if not current_user.is_anonymous() %}
-                      <span class="text-muted">Welcome, </span> <span >{{ request.nereid_user.display_name }}</span>
-                      <a href="{{ url_for('nereid.website.logout') }}"><span class="text-danger"><i class="fa fa-sign-out"></i> Log Out</span>
+                      <span class="text-muted">{{ _('Welcome') }} </span> <span >{{ request.nereid_user.display_name }}</span>
+                      <a href="{{ url_for('nereid.website.logout') }}"><span class="text-danger"><i class="fa fa-sign-out"></i>{{ _('Log Out') }}</span>
                       </a>
                       {% else %}
                       <a class="register-buttons" href="{{ url_for('nereid.website.login') }}">{{ _('Login / SignUp') }}</a>
@@ -215,7 +215,7 @@
                 itemprop="potentialAction" itemscope itemtype="http://schema.org/SearchAction">
                 <meta itemprop="target" content="{{ url_for('nereid.website.quick_search', _external=True) }}?q={q}"/>
                 <div id="search-bar">
-                  <input type="text" class="typeahead input-text typeahead search" data-provide="typeahead" name="q" itemprop="query-input" placeholder="Search" required>
+                  <input type="text" class="typeahead input-text typeahead search" data-provide="typeahead" name="q" itemprop="query-input" placeholder={{ _('Search') }} required>
                     <button class="button fa-search search-btn" type="submit"></button>
                 </div><!-- /input-group -->
               </form>
@@ -284,13 +284,13 @@
         <div class="row news-letter-section">
           <div class="subscribe-block">
             <div class="col-md-5 text-right text-center-xs">
-              <h4>Sign up for our Newsletter alerts</h4>
+              <h4>{{ _('Sign up for our Newsletter alerts') }}</h4>
             </div>
             <div class="col-md-4">
               <!--Subscribe form-->
               <form autocomplete="off">
                 <div class="input-group">
-                  <input type="text" class="form-control" placeholder="you@mail.com">
+                  <input type="text" class="form-control" placeholder={{ _('you@mail.com') }}>
                   <span class="input-group-btn">
                     <button class="btn btn-info" type="button"><i class="fa fa-plus"></i></button>
                   </span>
@@ -320,7 +320,7 @@
             <!-- Social Links and Subscribe -->
             <div class="col-md-{{ 12 - 2 * (footer_menuitem.children|length) }} social-block">
               <div class="row">
-                <h4>Social</h4>
+                <h4>{{ _('Social') }}</h4>
                 <a href="" class="social-links facebook"><i class="fa fa-facebook"></i></a>
                 <a href="" class="social-links twitter"><i class="fa fa-twitter"></i></a>
                 <a href="" class="social-links googleplus"><i class="fa fa-google-plus"></i></a>
@@ -333,7 +333,7 @@
         <!-- Second Row -->
         <div class="row">
           <div class="col-md-12 text-center payment-gateway">
-            <h4>Payment Gateway</h4>
+            <h4>{{ _('Payment Gateway') }}</h4>
             <ul class="list-inline">
               <li>
                 <img src="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='images/payment-gateway/visa.png') }}">
@@ -366,10 +366,10 @@
             <li>
               &copy; {{ request.nereid_website.copyright_year_range or '' }} {{ request.nereid_website.company.rec_name }} &nbsp;&nbsp;&nbsp;/
             </li>
-            <li><a href=""> All Rights Reserved</a>&nbsp;&nbsp;&nbsp;/</li>
-            <li><a href=""> Privacy Policy</a>&nbsp;&nbsp;&nbsp;/</li>
-            <li><a href=""> Terms of Use</a>&nbsp;&nbsp;&nbsp;/</li>
-            <li><a href="{{ url_for('nereid.website.render_sitemap') }}">Sitemap</a></li>
+            <li><a href=""> {{ _('All Rights Reserved') }}</a>&nbsp;&nbsp;&nbsp;/</li>
+            <li><a href=""> {{ _('Privacy Policy') }}</a>&nbsp;&nbsp;&nbsp;/</li>
+            <li><a href=""> {{ _('Terms of Use') }}</a>&nbsp;&nbsp;&nbsp;/</li>
+            <li><a href="{{ url_for('nereid.website.render_sitemap') }}">{{ _('Sitemap') }}</a></li>
           </ul>
         </div>
       </div>
@@ -378,7 +378,7 @@
 
     {% block _templates %}
     <script type="text/html"  id='cart-message'><strong><%= line.display_name %></strong>
-      added to your cart. <a href="{{ url_for('nereid.cart.view_cart') }}">checkout</a>
+      {{ _('added to your cart.') }} <a href="{{ url_for('nereid.cart.view_cart') }}">{{ _('checkout') }}</a>
     </script>
     <script type="text/html"  id='cart-html-append'>
 
@@ -389,7 +389,7 @@
         <%
         if (user_status.cart_size > 0){ %>
           <div class="cart-total">
-            <span class="pull-left"><%= parseInt(user_status.cart_size) %> Item(s)</span><span class="pull-right"><strong>{{ _('Subtotal') }} :</strong> <%= user_status.cart.total_amount %>
+            <span class="pull-left"><%= parseInt(user_status.cart_size) %> {{ _('Item(s)') }}</span><span class="pull-right"><strong>{{ _('Subtotal') }} :</strong> <%= user_status.cart.total_amount %>
             </span>
           </div>
           <%
@@ -418,7 +418,7 @@
         <% } else { %>
           <div class="empty-cart center">
             <i class="fa fa-frown-o fa-3x"></i>
-            <h3>hey !</h3>
+            <h3>{{ _('hey !') }}</h3>
             <p>{{ _('Your shopping cart is empty') }}</p>
           </div>
         <% } %>

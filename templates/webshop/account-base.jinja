@@ -8,10 +8,10 @@
   <div class="row">
     <ul class="list-inline account-links account-sidebar">
       <div class="orders">
-        <h4>Orders</h4>
+        <h4>{{ _('Orders') }}</h4>
         <div class="myorders">
         <li {% if active == 'orders' %}class="active"{% endif %}>
-          <a href="{{ url_for('sale.sale.render_list') }}">My {{ _('Orders') }}</a>
+          <a href="{{ url_for('sale.sale.render_list') }}">{{ _('My Orders') }}</a>
         </li>
         <li {% if active == 'wishlist' %}class="active"{% endif %}>
           <a href="{{ url_for('wishlist.wishlist.render_wishlists') }}">{{ _('Wishlist') }}</a>
@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="orders">
-        <h4>Account</h4>
+        <h4>{{ _('Account') }}</h4>
         <div class="myorders">
           <li {% if active == 'profile' %}class="active"{% endif %}>
               <a href="{{ url_for('nereid.website.account') }}">{{ _('Profile') }}</a>

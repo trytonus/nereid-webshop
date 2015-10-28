@@ -11,7 +11,7 @@
     <a href="{{ url_for('product.product.render', uri=line.product.uri) }}" class="product-name">
       <strong>{{ line.product.name }}</strong>
     </a>
-    <br/><strong class="text-muted">{{ _('Qty') }}: </strong>
+    <br/><strong class="text-muted">{{ _('Qty:') }} </strong>
     {{ line.quantity }} x {{ line.unit_price|currencyformat(currency) }}
   </td>
       <td class="text-right hidden-sm hidden-xs">
@@ -29,10 +29,10 @@
     <a href="{{ url_for('product.product.render', uri=line.product.uri) }}" class="product-name">
       <strong>{{ line.product.name }}</strong>
     </a>
-    <br><strong class="text-muted">SKU: </strong> {{ line.product.code }}
+    <br><strong class="text-muted">{{ _('SKU:') }} </strong> {{ line.product.code }}
       {% if line.product and line.product.is_gift_card and line.product.gift_card_delivery_mode in ['virtual', 'combined'] %}
-        <br><strong class="text-muted">Recipient Name: </strong> {{ line.recipient_name or 'N/A' }}
-        <br><strong class="text-muted">Recipient E-mail: </strong> {{ line.recipient_email or 'N/A' }}
+        <br><strong class="text-muted">{{ _('Recipient Name:') }} </strong> {{ line.recipient_name or _('N/A') }}
+        <br><strong class="text-muted">{{ _('Recipient E-mail:') }} </strong> {{ line.recipient_email or _('N/A') }}
       {% endif %}
       {% if line.product.attributes %}
         {% for attr in line.product.attributes %}
@@ -53,12 +53,12 @@
         <span class="text-muted">
           <a href="" data-url="{{ url_for('nereid.cart.delete_from_cart', line=line.id) }}" data-toggle="tooltip"
             data-placement="top" title="" data-original-title="{{ _('Remove Item') }}" class="remove_from_cart" data-ga-event-label="Remove From Cart" data-ga-product-name="{{ line.product.name }}" data-ga-product-category="{{ line.product.category and line.product.category.name or None }}" data-ga-product-price="{{ line.product.sale_price()|currencyformat(request.nereid_currency.code) }}" data-ga-product-id="{{ line.product.id }}" data-ga-product-quantity="{{ line.quantity }}">
-            <i class="fa fa-times"></i> Delete
+            <i class="fa fa-times"></i> {{ _('Delete') }} 
           </a>
           {% if current_user.is_authenticated() %}
             |
-            <span data-toggle="tooltip" data-placement="top" title="" data-product="{{ line.product.id }}" data-original-title="Add to Default Wishlist" class="add-to-wishlist">
-              <i class="fa fa-heart"></i> Add to wishlist
+            <span data-toggle="tooltip" data-placement="top" title="" data-product="{{ line.product.id }}" data-original-title={{ _('Add to Default Wishlist') }} class="add-to-wishlist">
+              <i class="fa fa-heart"></i> {{ _('Add to wishlist ') }} 
             </span>
           {% endif %}
         </span>
@@ -81,7 +81,7 @@
                 {% endfor %}
                 </select>
               {% else %}
-              <input class="form-control text-right qty" type="number" title="Qty"
+              <input class="form-control text-right qty" type="number" title={{ _('Qty') }}
                 value="{{ line.quantity|int }}" name="quantity" {% if line.product.is_gift_card %}disabled{% endif %}>
               {% endif %}
             </div>

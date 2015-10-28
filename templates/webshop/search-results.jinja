@@ -81,7 +81,7 @@
     <div class="row">
       <div class="col-md-12 node-items-block-separator center">
         <h5 class="text-muted">
-          {{ products.begin_count }} to {{ products.end_count }} of {{ products.count }} results for '{{ request.args.get('q', '') }}'
+          {{ products.begin_count }} {{ _('to') }} {{ products.end_count }} {{ _('of') }} {{ products.count }} {{ _('results for') }} '{{ request.args.get('q', '') }}'
         </h5>
       </div>
     </div>

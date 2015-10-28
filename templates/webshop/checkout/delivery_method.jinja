@@ -42,13 +42,13 @@
                   </div>
                 </div>
                 <button type="submit" class="btn btn-warning btn-lg btn-block" id="payment-btn">
-                  Continue to Payment <i class="fa fa-angle-double-right"></i>
+                  {{ _('Continue to Payment') }}<i class="fa fa-angle-double-right"></i>
                 </button>
                 <br>
               {% else %}
                 <div class="alert alert-warning">
-                  No shipping method found for this shipment Address,
-                  <a href="{{ url_for('nereid.checkout.shipping_address') }}">click here</a> to change.
+                  {{ _('No shipping method found for this shipment Address') }}
+                  <a href="{{ url_for('nereid.checkout.shipping_address') }}">{{ _('click here') }}</a> {{ _('to change') }}
                 </div>
               {% endif %}
               <input name=_csrf_token type=hidden value="{{ csrf_token() }}">

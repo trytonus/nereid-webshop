@@ -170,11 +170,11 @@ class Product:
             order_line = SaleLine(**values)
             order_line.save()
 
-            message = 'Gift Card has been added to your cart'
+            message = _('Gift Card has been added to your cart')
             if request.is_xhr:  # pragma: no cover
                 return jsonify(message=message)
 
-            flash(_(message), 'info')
+            flash(message, 'info')
             return redirect(url_for('nereid.cart.view_cart'))
 
         return render_template(
