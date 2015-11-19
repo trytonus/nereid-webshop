@@ -1201,6 +1201,19 @@ span.price{
   padding: 3px 12px;
   max-width: 200px;
 }
+.product-list-item .product-brand{
+  font-size: 1rem;
+}
+.product-list-item .product-price{
+  font-size: 1.6rem;
+}
+.product-list-item .product-description{
+  margin-top: 10px;
+  font-size: 1.4rem;
+}
+.product-list-item .product-title{
+  font-size: 1.6rem;
+}
 /****** My account Page *****/
 
 /** Recommended tabs and links in account page **/

@@ -45,3 +45,16 @@ class Node:
                 child.get_menu_item(max_depth=max_depth - 1)
                 for child in self.children
             ]
+
+    @classmethod
+    def get_template(cls):
+        """
+        Return templates available for node.
+        Downstream module can add new templates
+        """
+        res = super(Node, cls).get_template()
+
+        template = ('catalog/node-list-view.html', 'List View')
+        if template not in res:
+            res.append(template)
+        return res
