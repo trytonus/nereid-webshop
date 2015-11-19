@@ -55,21 +55,33 @@
           {% if request.nereid_website.accept_credit_card %}
           <div class="payment-container">
             <h4><span class="underline">{{ _('Add a new card') }}</span></h4>
-            <form class="form-horizontal tab-content" role="form" method="POST" id="pay-from-credit-card" autocomplete="off">
+            <div id="cardjs-container"></div>
+            <form class="form-horizontal tab-content" role="form" method="POST" id="pay-from-new-credit-card" autocomplete="off">
               {{ credit_card_form.csrf_token }}              
+
+              <!-- Fields required by backend -->
+              {{ credit_card_form.number(class_="hidden") }}
+              <input type="hidden" id="expiry_month" name="expiry_month"/>
+              <input type="hidden" id="expiry_year" name="expiry_year"/>
+
               <!-- Credit card-->
               <div class="" id="credit-card">
-                {{ render_field(credit_card_form.number, class_="input-lg form-control", pattern="[0-9]*", maxlength="16", minlength="13") }}
+                <div class="form-group ">
+                  <label for="card_number">Card Number
+                    <span>*</span>:
+                  </label>
+                  <input class="input-lg form-control required" required id="card_number" name="card_number" type="text" value="" />
+                </div>
                 {{ render_field(credit_card_form.owner, class_="input-lg form-control") }}
                 <div class="row">
                   <div class="col-xs-6">
-                    {{ render_field(credit_card_form.expiry_month, class_="input-lg form-control") }}
+                    <div class="form-group ">
+                      <label for="expiry">Card Expiry (MM/YY):
+                        <span>*</span>:
+                      </label>
+                      <input class="input-lg form-control required" id="expiry" name="expiry" pattern="\d{2}\s*/\s*\d{2}" required/>
+                    </div>
                   </div>
-                  <div class="col-xs-6">
-                    {{ render_field(credit_card_form.expiry_year, class_="input-lg form-control") }}
-                  </div>
-                </div>
-                <div class="row">
                   <div class="col-xs-6">
                     {{ render_field(credit_card_form.cvv, class_="input-lg form-control", pattern="[0-9]*", minlength="3", maxlength="4") }}
                   </div>
@@ -132,6 +144,7 @@
 
 {% block scripts %}
 {{ super() }}
+<script src="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='js/card.js') }}"></script>
 <script type="text/javascript">
 {% if current_user.is_authenticated() and current_user.party.payment_profiles %}
   $(document).ready(function(){
@@ -148,6 +161,35 @@
     });
   });
 {% endif %}
+
+$(function (){
+  /*
+   * Integrates card.js and sanitize form for backend
+   *
+  **/
+  var card = new Card({
+    form: '#pay-from-new-credit-card',
+    container: '#cardjs-container',
+    formSelectors: {
+        numberInput: 'input#card_number',
+        expiryInput: 'input#expiry',
+        cvcInput: 'input#cvv',
+        nameInput: 'input#owner'
+    },
+  });
+
+  $("#pay-from-new-credit-card").submit(function() {
+    var date_split = card.$expiryInput[0].value
+                        .replace(/\s/g, '')
+                        .split("/");
+    $(this).find("input#expiry_month").val(date_split[0]);
+    // Should work for this century
+    $(this).find("input#expiry_year").val("20" + date_split[1]);
+
+    $(this).find("input#number")
+      .val(card.$numberInput[0].value.replace(/\s/g, ""));
+  });
+});
 </script>
 {% endblock scripts %}
 
