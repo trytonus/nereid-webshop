@@ -6,7 +6,7 @@ from wtforms import TextField, validators
 from trytond.pool import PoolMeta, Pool
 from trytond.modules.nereid.party import AddressForm
 from trytond.config import config
-from nereid import request, current_app
+from nereid import request, current_app, current_user
 
 from trytond.modules.nereid_checkout.i18n import _
 
@@ -92,8 +92,8 @@ class Address:
                 phone=address.phone_number and address.phone_number.value
             )
         else:
-            address_name = "" if request.nereid_user.is_anonymous else \
-                request.nereid_user.display_name
+            address_name = "" if current_user.is_anonymous else \
+                current_user.display_name
             form = WebshopAddressForm(request.form, name=address_name)
 
         return form

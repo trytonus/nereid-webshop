@@ -12,13 +12,13 @@
           <div class="form-group">
             <label for="" class="col-sm-2 control-label">{{ _('Your Name') }}</label>
             <div class="col-sm-6">
-              <input type="text" class="form-control" id="" placeholder="{{ _('Your Name') }}" value="{{ request.nereid_user.display_name }}" disabled>
+              <input type="text" class="form-control" id="" placeholder="{{ _('Your Name') }}" value="{{ current_user.display_name }}" disabled>
             </div>
           </div>
           <div class="form-group">
             <label for="" class="col-sm-2 control-label">{{ _('Email') }}</label>
             <div class="col-sm-6">
-              <input type="email" class="form-control" id="" placeholder="{{ _('Email') }}" value="{{ request.nereid_user.email }}" disabled>
+              <input type="email" class="form-control" id="" placeholder="{{ _('Email') }}" value="{{ current_user.email }}" disabled>
             </div>
           </div>
           <!-- Password Change Tab -->
@@ -62,7 +62,7 @@
           <div class="form-group">
             <label for="" class="col-sm-2 control-label">{{ _('Mobile No.') }} </label>
             <div class="col-sm-6">
-              <input type="text" class="form-control" id="" placeholder="{{ _('your mobile no') }}" value="{{ request.nereid_user.party.phone }}">
+              <input type="text" class="form-control" id="" placeholder="{{ _('your mobile no') }}" value="{{ current_user.party.phone }}">
             </div>
           </div>
           <div class="form-group">
