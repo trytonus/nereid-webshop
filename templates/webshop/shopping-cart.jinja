@@ -168,23 +168,23 @@
       }
     });
 
-    $(".qty").change(function() {
-      var qty_element = $(this);
-      var qty_change_form = qty_element.closest('form.qty_change_form');
-
-      if (!qty_change_form.length) {
-        return;
-      }
+    $("form.qty_change_form").submit(function(e) {
+      var qty_element = $(this).find("input[name=quantity]");
       if (isNaN(parseInt(qty_element.val()))) {
         qty_element.val('1');
       }
       $.post(
-        qty_change_form.attr('action'),
-        qty_change_form.serialize(),
+        $(this).attr('action'),
+        $(this).serialize(),
         function () {
           window.location.reload();
         }
       );
+      e.preventDefault();
+    });
+    $(".qty").change(function() {
+      // Submit the respective form
+      $(this).closest('form').submit();
     });
 
     $("a.clear-cart").click(function(){
