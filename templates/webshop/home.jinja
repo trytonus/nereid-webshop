@@ -4,7 +4,7 @@
 {{ render_breadcrumb_item(_('Home'), url_for('nereid.website.home')) }}
 {% endblock breadcrumb %}
 
-{% set latest_products = request.nereid_website.latest_products_node and request.nereid_website.latest_products_node.get_products(per_page=24) %}
+{% set latest_products = current_website.latest_products_node and current_website.latest_products_node.get_products(per_page=24) %}
 
 {% block main %}
 
@@ -58,7 +58,7 @@
 
 <section class="products latest">
   <div class="container">
-    {% set homepage_menus = request.nereid_website.homepage_menu and request.nereid_website.homepage_menu.get_menu_item(max_depth=3).children %}
+    {% set homepage_menus = current_website.homepage_menu and current_website.homepage_menu.get_menu_item(max_depth=3).children %}
     {% if homepage_menus %}
       {% for child_menu in homepage_menus %}
         <div class="row section-spaces">

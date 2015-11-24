@@ -14,7 +14,7 @@
       <div class="delivery-address">
         <div class="col-md-7 col-sm-7 col-xs-12">
           {% block saved_cards %}
-          {% if request.nereid_website.accept_credit_card and current_user.is_authenticated and current_user.party.payment_profiles %}
+          {% if current_website.accept_credit_card and current_user.is_authenticated and current_user.party.payment_profiles %}
           <div class="payment-container">              
             <h4><span class="underline">{{ _('Your saved credit and debit cards') }}</span></h4>
 
@@ -52,7 +52,7 @@
           {% endblock saved_cards %}
 
           {% block add_card %}
-          {% if request.nereid_website.accept_credit_card %}
+          {% if current_website.accept_credit_card %}
           <div class="payment-container">
             <h4><span class="underline">{{ _('Add a new card') }}</span></h4>
             <form class="form-horizontal tab-content" role="form" method="POST" id="pay-from-credit-card" autocomplete="off">
@@ -74,7 +74,7 @@
                     {{ render_field(credit_card_form.cvv, class_="input-lg form-control", pattern="[0-9]*", minlength="3", maxlength="4") }}
                   </div>
                 </div>
-                {% if current_user.is_authenticated and request.nereid_website.save_payment_profile %}
+                {% if current_user.is_authenticated and current_website.save_payment_profile %}
                 <div class="checkbox">
                   {{ credit_card_form.add_card_to_profiles }}
                   <label for="add_card_to_profiles">{{ _('Save Card') }}</label>

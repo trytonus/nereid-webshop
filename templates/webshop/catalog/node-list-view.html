@@ -1,0 +1,123 @@
+{% extends "catalog/node.html" %}
+
+{% macro render_product_list_view(product, node=None, name=None, description=None, product_list_name=None) -%}
+{% set description = description or product.description %}
+{% if product.__name__ == 'product.template' %}
+  {% set product = product.products_displayed_on_eshop[0] %}
+{% endif %}
+{% if not name %}
+  {% if node and node.display == 'product.template' %}
+    {% set name = product.template.name %}
+  {% else %}
+    {% set name = product.name %}
+  {% endif %}
+{% endif %}
+{% set product_url = product.get_absolute_url(path=(node and node.slug or None), node=(node and node.id or None)) %}
+<div class="thumbnail">
+  <a href="{{ product_url }}" ga-product-link data-ga-product-list="{{ node and node.name or product_list_name }}" data-ga-event-label="Product Thumbnail" data-ga-product-id="{{ product.id }}" data-ga-product-name="{{ product.name }}" data-ga-product-category="{{ product.category and product.category.name or None }}" class="col-md-3">
+    <img src="{{ CDN }}{{ product.default_image.transform_command().thumbnail(300, 300, 'a') }}"
+          alt="{{ product.name }}"
+          title="{{ product.name }}"
+          class="img-responsive img-rounded">
+  </a>
+  <div class="caption">
+    <h5 class="product-title">
+      <a href="{{ product_url }}" ga-product-link data-ga-product-list="{{ node and node.name or product_list_name }}" data-ga-event-label="Product Name" data-ga-product-id="{{ product.id }}" data-ga-product-name="{{ product.name }}" data-ga-product-category="{{ product.category and product.category.name or None }}">{{ name|safe|truncate(50) }}</a>
+    </h5>
+    {% if product.brand %}<div class="product-brand text-muted">by {{ product.brand }}</div>{% endif %}
+    <p class="product-description" itemprop="description">{{ product.get_description() or '' }}</p>
+    {% if product.is_gift_card %}
+      <h6 class="product-price text-danger">{{ product.gc_min|currencyformat(current_locale.currency.code) }} - {{ product.gc_max|currencyformat(current_locale.currency.code) }}</h6>
+    {% else %}
+      <h6 class="product-price text-danger">{{ product.sale_price()|currencyformat(current_locale.currency.code) }}</h6>
+      {% if product.salable %}
+          <form action="{{ url_for("nereid.cart.add_to_cart") }}" method="post" id="product-buy-now" class="add-to-cart form-inline" autocomplete="off" data-ga-event-label="Add To Cart" data-ga-product-name="{{ product.name }}" data-ga-product-category="{{ product.category and product.category.name or None }}" data-ga-product-price="{{ product.sale_price()|currencyformat(current_locale.currency.code) }}">
+            <span class="tooltip-right-{{ product.id }}">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+              <input type="number" class="form-control col-xs-3" name="quantity" value="1" />
+              <input type="hidden" name="size" id="size-id"/>
+              <input type="hidden" name="product" value="{{ product.id }}"/>
+              <input type="hidden" name="action" value="add"/>
+              <button class="btn btn-primary btn-buynow product-buy-now product-{{ product.id }}-buy-now-btn" type="button"{% if not product.can_buy_from_eshop() %}disabled{% endif %}
+              quantity="1" id="buy-now-btn">Add to Cart</button>
+              {% if product.type == 'goods' %}
+                {% set status = product.inventory_status() %}
+                  <span class="text-{% if status[0] == 'in_stock' %}info{% else %}danger{% endif %}">
+                    <i class="fa fa-{% if status[0] == 'in_stock' %}info{% else %}warning{% endif %}"></i>
+                    {{ status[1] }}
+                  </span>
+              {% endif %}
+            </span>
+          </form>
+      {% else %}
+      <div style="padding-top:15px;">
+        <span class="text-danger" id="product-not-for-sale"><i class="fa fa-warning"></i>This product is not for sale</span>
+      </div>
+      {% endif %}
+    {% endif %}
+  </div>
+  <div class="clearfix"></div>
+</div>
+{% endmacro %}
+
+
+{% block main %}
+<section>
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="center">{{ node.name }}</h3>
+        {% if node.description %}
+        <p class="node-description">
+            {{ node.description|safe }}
+        </p>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if products.page==1 and node.children %}
+    <div class="row" id="subcategories">
+      {% for child in node.children %}
+      <div class="col-md-3 col-sm-4 col-xs-6">
+        <div class="thumbnail subcategory">
+          <a href="{{ child.get_absolute_url() }}">
+            <img src="{{ child.image and child.image.transform_command().thumbnail(500, 500, 'a') or url_for('nereid.webshop.send_static_file', filename='images/no-image.jpg') }}" alt="{{ child.name|truncate(50) }}" class="img-rounded img-responsive">
+          </a>
+          <div class="caption">
+            <h5 class="center">
+              <a href="{{ child.get_absolute_url() }}">
+                {{ child.name|truncate(50) }}
+              </a>
+            </h5>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="row">
+      <div class="col-md-12 node-items-block-separator center">
+        <h5 class="text-muted">
+          {{ products.begin_count }} to {{ products.end_count }} of {{ products.count }} results for {{ node.name }}
+        </h5>
+      </div>
+    </div>
+    <div class="row product-list">
+      {% for product in products %}
+        <div class="col-xs-12 product-list-item">
+        {{ render_product_list_view(product, node=node, product_list_name="Node List") }}
+        </div>
+      {% endfor %}
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        {{ render_pagination(products, endpoint='product.tree_node.render', active_id=node.id, slug=node.slug) }}
+      </div>
+    </div>
+
+  </div><!-- END Container -->
+</section>
+{% endblock main%}
+
