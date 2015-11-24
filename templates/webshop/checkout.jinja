@@ -49,10 +49,10 @@
       <div class="col-md-10 col-md-offset-1">
         <div class="col-md-8">
           <div class="address-container">
-            {% if request.nereid_user.party.addresses %}
+            {% if current_user.party.addresses %}
             <h4><span>Choose from an existing address below</span></h4>
             <div class="row">
-              {% for address in request.nereid_user.party.addresses %}
+              {% for address in current_user.party.addresses %}
               <div class="col-md-6 clearfix">
                 {{ render_delivery_address(address) }}
               </div>

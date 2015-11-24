@@ -6,7 +6,7 @@ from jinja2.filters import do_striptags
 from werkzeug.exceptions import NotFound
 
 from nereid import jsonify, flash, request, url_for, route, redirect, \
-    render_template, abort
+    render_template, abort, current_locale
 from nereid.contrib.locale import make_lazy_gettext
 
 from forms import GiftCardForm
@@ -90,7 +90,7 @@ class Product:
                  "@type": "Offer",
                  "availability": "http://schema.org/InStock",
                  "price": str(sale_price),
-                 "priceCurrency": request.nereid_currency.code,
+                 "priceCurrency": current_locale.currency.code,
             },
             "image": self.default_image.transform_command().thumbnail(
                 500, 500, 'a').url(_external=True),
