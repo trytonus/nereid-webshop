@@ -522,15 +522,17 @@
         // Disable buy now button for already bought items from cart lines
         // TODO: Handle case same way when product is removed from cart.
         $.each(lines, function(index, line) {
-          $(".product-" + line.product.id + "-buy-now-btn")
+          var buy_now_button = $(".product-" + line.product.id + "-buy-now-btn");
+          buy_now_button
             .attr('disabled', 'disabled');
-            var isDisabled=$(".product-" + line.product.id + "-buy-now-btn").prop('disabled');
-            if(isDisabled){
-              $('.tooltip-bottom-'+ line.product.id).tooltip({
-                title: "This product is already added to the cart",
-                placement: "bottom"
-              });
-            }
+          $('.tooltip-bottom-'+ line.product.id).tooltip({
+            title: "This product is already added to the cart",
+            placement: "bottom"
+          });
+          $('.tooltip-right-'+ line.product.id).tooltip({
+            title: "This product is already added to the cart",
+            placement: "right"
+          });
         });
       }
 
@@ -610,6 +612,14 @@
       });
     </script>
     <script type="text/javascript">
+      // Case when form is submitted via enter button.
+      $(".add-to-cart").submit(function(e) {
+        var buy_now_btn = $(this).find('.product-buy-now');
+        if (buy_now_btn.length) {
+          e.preventDefault();
+          buy_now_btn.click();
+        }
+      });
       $('.product-buy-now').on('click', function(e){
         var qty_element = $(this).siblings("input[name='quantity']");
         var product_element = $(this).siblings("input[name='product']");

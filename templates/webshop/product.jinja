@@ -101,7 +101,7 @@
       <!--Product Description -->
       <div class="row">
         <div class="col-md-12 product-desc">
-          <p itemprop="description">{{ product.get_description() }}</p>
+          <p itemprop="description">{{ product.get_description() or '' }}</p>
         </div>
       </div>
       {% endblock product_description %}
