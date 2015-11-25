@@ -7,9 +7,21 @@
       {{ account_header(_('My Account / Wishlist'), 'wishlist') }}
       <div class="col-md-10">
         <div class="row margin-left-0">
-          <div class="col-md-10">
+          <div class="col-md-8">
             <h4 class="wishlist-heading">{{ wishlist.name|title }}</h4>
           </div>
+          {% if is_public %}
+          <div class="col-md-1" id="share-buttons">
+            <!-- <button>
+              <a class="fa fa-envelope" href="mailto:?subject={{ wishlist.name|title }}&body="></a>
+            </button> -->
+            <span class='st_email_large' displayText='Email'></span>
+            <span class='st_facebook_large' displayText='Facebook'></span>
+            <span class='st_twitter_large' displayText='Tweet'></span>
+            <span class='st_googleplus_large' displayText='Google +'></span>
+            <span class='st_pinterest_large' displayText='Pinterest'></span>
+          </div>
+          {% endif %}
           <div class="col-md-2" id="wishlist-settings">
             <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#privacy-settings">
               <i class="fa fa-cog"></i> &nbsp;&nbsp;{{ _('Settings') }}
@@ -33,7 +45,8 @@
                 </form>
                 </div>
                 <div class="modal-footer">
-                  <button type="submit" class="btn btn-danger pull-left" data-url="{{ url_for('wishlist.wishlist.render_wishlist', active_id=wishlist.id) }}" id="remove-wishlist-btn">{{ _('Remove this wishlist') }}</button>
+                  <button type="submit" class="btn btn-danger pull-left" data-url="{{ url_for('wishlist.wishlist.render_wishlist', active_id=wishlist.id) }}" id="remove-wishlist-btn">{{ _('Make wishlist private') }}</button>
+                  <button type="submit" class="btn btn-danger pull-left" data-url="{{ url_for('wishlist.wishlist.render_wishlist', active_id=wishlist.id) }}" id="remove-wishlist-btn">{{ _('Remove this wishlist') }}</button>                  
                   <button type="button" class="btn btn-primary" id="save-changes">{{ _('Save changes') }}</button>
                 </div>
               </div>

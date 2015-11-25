@@ -13,13 +13,15 @@ CWD = os.path.abspath(os.path.dirname(__file__))
 CONFIG = dict(
 
     # The name of database
-    DATABASE_NAME=os.environ.get('TRYTOND_DB_NAME'),
+    DATABASE_NAME='fulfilio',
 
     # If the application is to be configured in the debug mode
     DEBUG=True,
 
     # The location where the translations of this template are stored
     TRANSLATIONS_PATH='i18n',
+
+    EAGER_TEMPLATE_RENDER=True,
 
     # Secret Key: Replace this with something random
     # A good way to generate such a number would be
