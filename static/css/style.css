@@ -1942,3 +1942,7 @@ a.nav-expander.fixed{
   color: #fff;
   padding: 20px;
 }
+div#wishlist-share-buttons a {
+  font-size:3rem;
+  line-height: 37px;
+}
