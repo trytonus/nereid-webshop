@@ -439,6 +439,7 @@
     <script src="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='js/typeahead.bundle.min.js') }}"></script>
     <script src="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='js/jquery.bxslider.min.js') }}"></script>
     <script src="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='js/nereid.js') }}"></script>
+    <script src="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='js/jquery.sharrre.min.js') }}"></script>
     {% block script_tags %}
       {#
         use this block for additional script tags which can be replaced by downstream modules if they dont use
@@ -621,15 +622,12 @@
         }
       });
       $('.product-buy-now').on('click', function(e){
-        var qty_element = $(this).siblings("input[name='quantity']");
-        var product_element = $(this).siblings("input[name='product']");
-        var new_quantity = parseInt(qty_element.val());
         var template = $("#cart-message").html();
-
+        var form_data = $(this).closest('form').serialize();
         $.ajax({
           type: "POST",
           url: "{{ url_for('nereid.cart.add_to_cart') }}",
-          data: {'quantity': new_quantity, 'product': product_element.val()}
+          data: form_data
         })
         .done(function(result){
           updatedCart();

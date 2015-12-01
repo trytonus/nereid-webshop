@@ -1,4 +1,5 @@
 {% extends 'account-base.jinja' %}
+{% block title %}{{ _('My wishlist') }} ({{ wishlist.name }}) {{ _('on') }} {{ super() }}{% endblock %}
 {% from '_helpers.jinja' import render_product_list %}
 {% block main %}
 <section class="my-account" id="specific-wishlist">
@@ -7,14 +8,24 @@
       {{ account_header(_('My Account / Wishlist'), 'wishlist') }}
       <div class="col-md-10">
         <div class="row margin-left-0">
-          <div class="col-md-10">
+          <div class="col-md-8">
             <h4 class="wishlist-heading">{{ wishlist.name|title }}</h4>
           </div>
-          <div class="col-md-2" id="wishlist-settings">
-            <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#privacy-settings">
-              <i class="fa fa-cog"></i> &nbsp;&nbsp;Settings
-            </button>
-          </div>
+          {% if wishlist.is_public %}
+            <div id="wishlist-share-buttons" class="col-md-2">
+              <a href="#" class="twitter fa fa-twitter-square"></a>
+              <a href="#" class="facebook fa fa-facebook-square"></a>
+              <a href="#" class="googleplus fa fa-google-plus-square"></a>
+              <a href="#" class="pinterest fa fa-pinterest-square"></a>
+            </div>
+          {% endif %}
+          {% if wishlist.nereid_user == current_user %}
+            <div class="col-md-2" id="wishlist-settings">
+              <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#privacy-settings"> 
+                <i class="fa fa-cog"></i> &nbsp;&nbsp;{{ _('Settings') }}
+              </button>
+            </div>
+          {% endif %}
           <div class="modal fade" id="privacy-settings" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -29,6 +40,10 @@
                    <div class="form-group col-md-10 col-md-offset-1">
                     <label>Edit Wishlist Name:</label>
                     <input type="text" name="name" value="" placeholder="Name" class="form-control" required >
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" {% if wishlist.is_public %} checked {% endif %}  name="is_public">&nbsp;&nbsp;{{ _('Public') }}
+                    </label>
                   </div>
                 </form>
                 </div>
@@ -111,6 +126,33 @@
         .done(function() {
           $(location).attr('href',"{{ url_for('wishlist.wishlist.render_wishlists', _external=True) }}");
       });
+    });
+    $('#wishlist-share-buttons').sharrre({
+        share: {
+          twitter: true,
+          facebook: true,
+          googlePlus: false,
+          pinterest: true
+        },
+        url: window.location.href,
+        urlCurl: '',
+        template: $("#wishlist-share-buttons").html(),
+        render: function(api, options){
+          $(api.element).on('click', '.twitter', function() {
+            api.openPopup('twitter');
+          });
+          $(api.element).on('click', '.facebook', function() {
+            api.openPopup('facebook');
+          });
+          $(api.element).on('click', '.googleplus', function() {
+            api.openPopup('googlePlus');
+          });
+          $(api.element).on('click', '.pinterest', function() {
+            api.openPopup('pinterest');
+          });
+        },
+        enableHover: false,
+        enableTracking: true,
     });
   });
 </script>
