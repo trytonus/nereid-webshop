@@ -229,7 +229,7 @@
       <!--Main Navigation -->
       {% block main_navigation %}
       {% from '_helpers.jinja' import render_cms_root_menu %}
-      {% set root_menu = request.nereid_website.cms_root_menu and render_cms_root_menu(request.nereid_website.cms_root_menu) %}
+      {% set root_menu = current_website.cms_root_menu and render_cms_root_menu(current_website.cms_root_menu) %}
       <div class="container sticky hidden-xs">
         {% if not checkout_page %}
         <div class="row main-navigation">
