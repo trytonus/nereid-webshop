@@ -228,14 +228,15 @@
 
       <!--Main Navigation -->
       {% block main_navigation %}
+      {% from '_helpers.jinja' import render_cms_root_menu %}
+      {% set root_menu = request.nereid_website.cms_root_menu and render_cms_root_menu(request.nereid_website.cms_root_menu) %}
       <div class="container sticky hidden-xs">
         {% if not checkout_page %}
         <div class="row main-navigation">
           <div class="col-md-12">
             <ul class="list-inline" id="nav-list">
-              {% from '_helpers.jinja' import render_cms_root_menu %}
-              {% if request.nereid_website.cms_root_menu %}
-                {{ render_cms_root_menu(request.nereid_website.cms_root_menu) }}
+              {% if root_menu %}
+                {{ root_menu }}
               {% endif %}
               {# add any other navigational elements like probably an article list or custom link here #}
             </ul>
@@ -247,11 +248,10 @@
       <div class="visible-xs-block mobile-view-menu">
         <nav>
           <ul class="list-unstyled main-menu">
-            {% from '_helpers.jinja' import render_cms_root_menu %}
-              {% if request.nereid_website.cms_root_menu %}
-                {{ render_cms_root_menu(request.nereid_website.cms_root_menu) }}
-              {% endif %}
-              {# add any other navigational elements like probably an article list or custom link here #}
+            {% if root_menu %}
+              {{ root_menu }}
+            {% endif %}
+            {# add any other navigational elements like probably an article list or custom link here #}
             <!--Include your navigation here-->
           </ul>
         </nav>
