@@ -84,7 +84,7 @@ class PostgresTest(Command):
 
 
 MODULE2PREFIX = {
-    'nereid_wishlist': 'openlabs',
+    'nereid_wishlist': 'fio',
     'gift_card': 'fio',
     'nereid_cms': 'fio',
     'product_variant_name': 'openlabs',
