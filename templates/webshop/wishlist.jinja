@@ -12,15 +12,26 @@
             <h4 class="wishlist-heading">{{ wishlist.name|title }}</h4>
           </div>
           {% if wishlist.is_public %}
-            <div id="wishlist-share-buttons" class="col-md-2">
-              <a href="#" class="twitter fa fa-twitter-square"></a>
-              <a href="#" class="facebook fa fa-facebook-square"></a>
-              <a href="#" class="googleplus fa fa-google-plus-square"></a>
-              <a href="#" class="pinterest fa fa-pinterest-square"></a>
+            <div id="wishlist-share-buttons" class="col-md-3">
+              <a href="#" class="envelope fa fa-envelope"></a>
+              <a href="#" class="sh-facebook fa fa-facebook"></a>
+              <a href="#" class="sh-twitter fa fa-twitter"></a>
+              <a href="#" class="sh-googleplus fa fa-google-plus"></a>
+              <a href="#" class="sh-pinterest fa fa-pinterest"></a>
             </div>
+          {% else %}
+            <form method="post" action="">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+              <input type="hidden" name="wishlist" value="{{ wishlist.id }}"/>
+              <input type="hidden" name="name" value="{{ wishlist.name }}"/>
+              <input type="hidden" name="is_public" value="on"/>
+              <div id="enable-share" class="col-md-2">
+                <button type="submit" class="btn btn-secondary pull-left" data-url="{{ url_for('wishlist.wishlist.render_wishlist', active_id=wishlist.id) }}" id="enable-share-btn">{{ _('Share') }}</button>
+              </div>
+            </form>
           {% endif %}
           {% if wishlist.nereid_user == current_user %}
-            <div class="col-md-2" id="wishlist-settings">
+            <div class="col-md-1" id="wishlist-settings">
               <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#privacy-settings"> 
                 <i class="fa fa-cog"></i> &nbsp;&nbsp;{{ _('Settings') }}
               </button>
@@ -138,16 +149,22 @@
         urlCurl: '',
         template: $("#wishlist-share-buttons").html(),
         render: function(api, options){
-          $(api.element).on('click', '.twitter', function() {
+          $(api.element).on('click', '.envelope', function(){
+            var subject = encodeURIComponent(document.title);
+            var body = encodeURIComponent("Checkout my Wish List \n"+window.location);
+            var uri = "mailto:?subject="+subject+"&body="+body;
+            window.location.href = uri;
+          });
+          $(api.element).on('click', '.sh-twitter', function() {
             api.openPopup('twitter');
           });
-          $(api.element).on('click', '.facebook', function() {
+          $(api.element).on('click', '.sh-facebook', function() {
             api.openPopup('facebook');
           });
-          $(api.element).on('click', '.googleplus', function() {
+          $(api.element).on('click', '.sh-googleplus', function() {
             api.openPopup('googlePlus');
           });
-          $(api.element).on('click', '.pinterest', function() {
+          $(api.element).on('click', '.sh-pinterest', function() {
             api.openPopup('pinterest');
           });
         },
