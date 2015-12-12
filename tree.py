@@ -26,7 +26,7 @@ class Node:
             'link': self.get_absolute_url(),
             'image': self.image,
         }
-        if max_depth:
+        if max_depth > 0:
             res['children'] = self.get_children(max_depth=max_depth - 1)
 
         return res
