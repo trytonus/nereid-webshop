@@ -11,7 +11,9 @@
     {{ render_breadcrumb_item(title, url) }}
   {% endfor %}
 {% endblock breadcrumb %}
-
+{% block extra_head %}
+     <link rel="stylesheet" type="text/css" href="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='css/grid_list.css') }}">
+{% endblock extra_head %}
 {% block main %}
 <section>
   <div class="container">
@@ -94,6 +96,18 @@
     $(window).on('resize', resize_categories);
 
   });
+    var button_list = document.getElementById('button_list');
+    var button_grid = document.getElementById('button_grid'); 
+    button_grid.onclick = function() {
+        document.getElementById('product_grid').style.display = 'block';
+        document.getElementById('product_list').style.display = 'none';
+        return false;
+    }
+    button_list.onclick = function() {
+            document.getElementById('product_grid').style.display = 'none';
+            document.getElementById('product_list').style.display = 'block';
+            return false;
+    }
 </script>
 {% endblock scripts %}
 

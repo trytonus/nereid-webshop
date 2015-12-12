@@ -1,0 +1,16 @@
+.grid_list{
+  margin:10px;
+}
+
+.product-grid{
+  display:none;
+}
+
+.grid{
+  padding:10px; 
+  width:300px; 
+  margin:10px; 
+  border: 1px solid #ddd; 
+  float:left; 
+  display:block;
+}
