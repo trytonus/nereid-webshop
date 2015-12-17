@@ -77,6 +77,16 @@
                     {% endif %}
                   alt="{{ child.title }}" title="{{ child.title }}">
                 </a>
+                {% if child.record and child.record.__name__ == 'product.product' %}
+                  {% set product = child.record %}
+                  <div class="caption">
+                    <h5 class="center">
+                      <a href="{{ product.get_absolute_url() }}" ga-product-link="" data-ga-product-list="Homepage" data-ga-event-label="Product Name" data-ga-product-id="{{ product.id }}" data-ga-product-name="{{ product.name }}" data-ga-product-category="None">{{ product.name }}</a>
+                    </h5>
+                  <h6 class="text-danger center">{{ product.sale_price(1) | currencyformat(request.nereid_currency.code) }}</h6> 
+                  </div>
+                {% endif %}
+
               </div>
             {% endfor %}
             </div>
