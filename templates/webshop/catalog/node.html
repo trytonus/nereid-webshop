@@ -94,6 +94,14 @@
     $(window).on('resize', resize_categories);
 
   });
+
+    $('#button_list').click(function() {
+        $('.product-list .grid').addClass('col-xs-12 product-list-item').removeClass('grid'); 
+    });
+    $('#button_grid').click(function() {
+        $('.product-list .product-list-item').addClass('grid').removeClass('col-xs-12 product-list-item');
+     });
+ 
 </script>
 {% endblock scripts %}
 
