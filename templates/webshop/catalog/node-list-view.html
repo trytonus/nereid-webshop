@@ -67,7 +67,14 @@
 
     <div class="row">
       <div class="col-md-12">
-        <h3 class="center">{{ node.name }}</h3>
+        <h3 class="center">{{ node.name }}
+        <div id="buttons" class="grid_list" style="float: right;"> 
+            <div class="btn-group">
+                <a href="#" id="button_list" class="btn btn-default btn-sm"><span class="fa fa-list"></span></a> 
+                <a href="#" id="button_grid" class="btn btn-default btn-sm"><span class="fa fa-th"></span></a>
+            </div>
+        </div>
+        </h3>
         {% if node.description %}
         <p class="node-description">
             {{ node.description|safe }}

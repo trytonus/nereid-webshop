@@ -1959,3 +1959,10 @@ div#wishlist-share-buttons a {
   font-size:3rem;
   line-height: 37px;
 }
+.grid{
+   padding:10px; 
+   width:40px;
+   border: 1px solid #ddd; 
+   float:left;
+   display:inline-block;
+}
