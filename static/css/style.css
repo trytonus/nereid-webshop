@@ -1606,7 +1606,8 @@ border-top: 1px solid rgba(248, 248, 248, 0.2);
     margin-bottom: 15px;
 }
 .node-items-block-separator h5 {
-    padding: 5px;
+    margin: 0;
+    line-height: 45px;
 }
 .margin-top-15{
   margin-top: 15px;
@@ -1958,4 +1959,78 @@ a.nav-expander.fixed{
 div#wishlist-share-buttons a {
   font-size:3rem;
   line-height: 37px;
+}
+
+/* Styles written by GUL JAMAL ZIM*/
+/*.product-list-item .thumbnail {
+  border: none;
+  border-radius: 0;
+}
+.product-list-item {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}*/
+
+.node-items-block-separator {
+  position: relative;
+  margin-bottom: 30px;
+  height: 45px;
+}
+.view-switch {
+  position: absolute;
+  right: 0;
+  top: 5px;
+  font-size: 25px;
+  margin: 0 15px 15px 0;
+}
+.view-switch .fa {
+  margin-left: 7px;
+  color: #888;
+  cursor: pointer;
+}
+.view-switch .fa.select {
+  color: #428bca;
+}
+.grid.product-list-item .product-image-link {
+  display: block;
+  width: auto;
+  height: 200px;
+}
+.grid.product-list-item .product-image {
+  max-height: 200px;
+}
+.grid.product-list-item .caption .quantity {
+  width: 50%;
+  margin-right: 5px;
+}
+.grid.product-list-item .text-info {
+  display: block;
+  margin-top: 5px;
+}
+
+@media screen and (max-width: 599px) {
+  .view-switch {
+    display: none;
+  }
+}
+
+@media screen and (min-width : 600px) and (max-width: 1080px) {
+  .grid.product-list-item {
+    width: 50%;
+    text-align: center;
+  }
+  .product-list {
+    margin-bottom: 0px;
+  }
+}
+
+@media screen and (min-width : 1081px) {
+  .grid.product-list-item {
+    width: 25%;
+    text-align: center;
+  }
+
+  .product-list {
+    margin-bottom: 0px;
+  }
 }

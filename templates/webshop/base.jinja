@@ -658,7 +658,7 @@
       $(document).ready(function(){
         function resize_products () {
           var tallest_el_height = 0;
-          $('.product-list').children()
+          $('.product-list').children('.product-list-item.grid')
             .height('auto')
             .each(function() {
               if ($(this).height() > tallest_el_height){
@@ -667,12 +667,17 @@
             .height(tallest_el_height);
         }
 
+        function resize_products_list_view () {
+          $('.product-list').children().height('auto');
+        }
+
         // Resize on load
         $('.product-list').imagesLoaded(resize_products);
 
         // Adjust height on window resize
         $(window).on('resize', resize_products);
-
+        $(document).on('click', '.view-switch .list-view', resize_products_list_view);
+        $(document).on('click', '.view-switch .grid-view', resize_products);
       });
     </script>
     {% if GOOGLE_ANALYTICS_PROPERTY_ID %}
