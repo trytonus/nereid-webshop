@@ -113,7 +113,7 @@
                       </tr>
                       <tr>
                         <td class="cart-total-sum">{{ _('Grand Total') }}</td>
-                        <td class="cart-total-sum" id="cart-total">{{ cart.sale.total_amount|currencyformat(currency) }}</td>
+                        <td class="cart-total-sum" id="cart-total">{{ cart.sale.total_amount|fullcurrencyformat(currency) }}</td>
                       </tr>
                     </table>
                   {% endblock order_summary_table %}
