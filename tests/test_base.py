@@ -98,7 +98,8 @@ class BaseTestCase(NereidTestCase):
         return self.Category.create(vlist)
 
     def _create_product_template(
-        self, name, vlist, uri, uom=u'Unit', displayed_on_eshop=True
+        self, name, vlist, uri, uom=u'Unit', displayed_on_eshop=True,
+        list_price=Decimal('10'), cost_price=Decimal('5')
     ):
         """
         Create a product template with products and return its ID
@@ -142,12 +143,12 @@ class BaseTestCase(NereidTestCase):
                 'category': self.category.id,
                 'type': 'goods',
                 'salable': True,
-                'list_price': Decimal('10'),
-                'cost_price': Decimal('5'),
                 'account_expense': self._get_account_by_kind('expense').id,
                 'account_revenue': self._get_account_by_kind('revenue').id,
             }],
             uri='product-1',
+            list_price=Decimal('10'),
+            cost_price=Decimal('5'),
         )
         self._create_product_template(
             'product 2',
@@ -155,36 +156,36 @@ class BaseTestCase(NereidTestCase):
                 'category': self.category2.id,
                 'type': 'goods',
                 'salable': True,
-                'list_price': Decimal('20'),
-                'cost_price': Decimal('5'),
                 'account_expense': self._get_account_by_kind('expense').id,
                 'account_revenue': self._get_account_by_kind('revenue').id,
             }],
             uri='product-2',
+            list_price=Decimal('10'),
+            cost_price=Decimal('5'),
         )
         self._create_product_template(
             'product 3',
             [{
                 'category': self.category3.id,
                 'type': 'goods',
-                'list_price': Decimal('30'),
-                'cost_price': Decimal('5'),
                 'account_expense': self._get_account_by_kind('expense').id,
                 'account_revenue': self._get_account_by_kind('revenue').id,
             }],
             uri='product-3',
+            list_price=Decimal('10'),
+            cost_price=Decimal('5'),
         )
         self._create_product_template(
             'product 4',
             [{
                 'category': self.category3.id,
                 'type': 'goods',
-                'list_price': Decimal('30'),
-                'cost_price': Decimal('5'),
                 'account_expense': self._get_account_by_kind('expense').id,
                 'account_revenue': self._get_account_by_kind('revenue').id,
             }],
             uri='product-4',
+            list_price=Decimal('10'),
+            cost_price=Decimal('5'),
             displayed_on_eshop=False
         )
 

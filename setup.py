@@ -87,7 +87,7 @@ MODULE2PREFIX = {
     'nereid_wishlist': 'fio',
     'gift_card': 'fio',
     'nereid_cms': 'fio',
-    'product_variant_name': 'openlabs',
+    'product_variant': 'fio',
 }
 
 MODULE = "nereid_webshop"
