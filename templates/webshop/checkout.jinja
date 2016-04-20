@@ -63,6 +63,7 @@
             <div class="row">
               <div class="col-md-6 pull-right">
                 <form action="" method="post" autocomplete="off">
+                  <label for="address-id" class="hidden">Hidden Input</label>
                   <input type="hidden" name="address" id="address-id" value=""/>
                   <button  class="btn btn-primary pull-right" id="existing-address-payment" address="">Proceed to Payment&nbsp;&nbsp;<i class="fa fa-angle-double-right"></i>
                   </button>
@@ -79,47 +80,47 @@
             <!-- Add new address form -->
             <form role="form" action="" method="POST" autocomplete="off">
               <div class="form-group">
-                <label for="exampleInputEmail1">Name *</label>
-                <input type="text" class="form-control" placeholder="your name">
+                <label for="name_input">Name *</label>
+                <input id="name_input" type="text" class="form-control" placeholder="your name">
               </div>
               <div class="form-group">
-                <label for="exampleInputEmail1">Street *</label>
-                <input type="text" class="form-control" placeholder="street">
+                <label for="street_input">Street *</label>
+                <input id="street_input" type="text" class="form-control" placeholder="street">
               </div>
               <div class="form-group">
-                <label for="exampleInputEmail1">Street (Bis)*</label>
-                <input type="text" class="form-control" placeholder="street (bis)">
+                <label for="bis_street_input">Street (Bis)*</label>
+                <input id="bis_street_input" type="text" class="form-control" placeholder="street (bis)">
               </div>
               <div class="row">
                 <div class="form-group col-md-6">
-                  <label for="exampleInputEmail1">City *</label>
-                  <input type="text" class="form-control" placeholder="California">
+                  <label for="city_input">City *</label>
+                  <input id="city_input" type="text" class="form-control" placeholder="California">
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="exampleInputEmail1">Post Code*</label>
-                  <input type="text" class="form-control" placeholder="33130">
+                  <label for="post_code_input">Post Code*</label>
+                  <input id="post_code_input" type="text" class="form-control" placeholder="33130">
                 </div>
               </div>
               <div class="row">
                 <div class="form-group col-md-6">
-                  <label for="exampleInputEmail1">Email</label>
-                  <input type="email" class="form-control" placeholder="California">
+                  <label for="email_input">Email</label>
+                  <input id="email_input" type="email" class="form-control" placeholder="California">
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="exampleInputEmail1">Phone</label>
-                  <input type="text" class="form-control" placeholder="1234567890">
+                  <label for="phone_input">Phone</label>
+                  <input id="phone_input" type="text" class="form-control" placeholder="1234567890">
                 </div>
               </div>
               <div class="row">
                 <!--Select country -->
                 <div class="form-group col-md-6">
-                  <label for="">Country *</label>
+                  <label for="country">Country *</label>
                   <select id="country" class="form-control">
                   </select>
                 </div>
                 <!--Select State/County -->
                 <div class="form-group col-md-6">
-                  <label for="">State/County *</label>
+                  <label for="subdivision">State/County *</label>
                   <select id="subdivision" class="form-control">
                   </select>
                 </div>

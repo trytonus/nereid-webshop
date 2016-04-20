@@ -6,6 +6,8 @@
 
 {% set latest_products = request.nereid_website.latest_products_node and request.nereid_website.latest_products_node.get_products(per_page=24) %}
 
+
+
 {% block main %}
 
 {% block banner %}
@@ -44,10 +46,10 @@
           {% endfor %}
           </div>
         <a class="left carousel-control hidden-xs" href="#homepage-banner-carousel" data-slide="prev">
-            <span class="icon-prev"></span>
+            <span class="icon-prev"></span> <span class="hidden">Go to previous slide</span>
         </a>
         <a class="right carousel-control hidden-xs" href="#homepage-banner-carousel" data-slide="next">
-            <span class="icon-next"></span>
+            <span class="icon-next"></span> <span class="hidden">Go to next slide</span>
         </a>
       </div>
     </div>

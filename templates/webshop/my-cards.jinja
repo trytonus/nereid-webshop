@@ -19,8 +19,10 @@
             {% for card in current_user.party.payment_profiles %}
             <div class="well well-small">
               <form name="remove-payment-profile" action="{{ url_for('party.party.remove_payment_profile') }}" method="post" autocomplete="off">
-                <input name="csrf_token" type="hidden" value="{{ csrf_token() }}"/>
-                <input type="hidden" name="profile_id" value="{{ card.id }}"/>
+                <label for="csrf_token" class="hidden">Hidden Input</label>
+                <input name="csrf_token" id="csrf_token" type="hidden" value="{{ csrf_token() }}"/>
+                <label for="profile_id" class="hidden">Hidden Input</label>
+                <input type="hidden" name="profile_id" id="profile_id" value="{{ card.id }}"/>
                 <button type="submit" class="pull-right btn btn-link"><i class="fa fa-trash-o"></i> {{ _('Remove') }}</button>
               </form>
               {{ render_payment_profile(card) }}

@@ -58,7 +58,8 @@
           <div class="tab-pane {% if loop.first %}active{% endif %}" id="tab{{ loop.index }}">
             <div class="zoom-container">
               <a id="zoom-target" href="{{ image.url }}" data-lightbox="{{ product.id }}" >
-                <img class="zoom-image" src="{{ image.transform_command().thumbnail(500, 500, 'a') }}"/>
+                <img class="zoom-image" src="{{ image.transform_command().thumbnail(500, 500, 'a') }}" alt="product image" />
+                <span class="hidden">Product Image</span>
               </a>
             </div>
           </div>
@@ -75,7 +76,8 @@
           {% for image in product.get_images() %}
           <li class="{% if loop.first %}active{% endif %} sub-products">
             <a href="#tab{{ loop.index }}" data-toggle="tab">
-              <img src="{{ image.transform_command().thumbnail(120, 120, 'a') }}" />
+              <img src="{{ image.transform_command().thumbnail(120, 120, 'a') }}" alt="Product Image" />
+              <span class="hidden">Product Image</span>
             </a>
           </li>
           {% endfor %}
@@ -143,11 +145,16 @@
           <div class="col-md-12 col-sm-12 col-xs-12 buy-now">
             <form action="{{ url_for("nereid.cart.add_to_cart") }}" method="post" id="product-buy-now" class="add-to-cart" autocomplete="off" data-ga-event-label="Add To Cart" data-ga-product-name="{{ product.name }}" data-ga-product-category="{{ product.category and product.category.name or None }}" data-ga-product-price="{{ product.sale_price()|currencyformat(request.nereid_currency.code) }}">
               <div class="tooltip-bottom-{{ product.id }}">
-                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                <input type="hidden" name="quantity" value="1"/>
-                <input type="hidden" name="size" id="size-id"/>
-                <input type="hidden" name="product" value="{{ product.id }}"/>
-                <input type="hidden" name="action" value="add"/>
+                <label for="csrf_token" class="hidden">Hidden Input</label>
+                <input type="hidden" id="csrf_token" name="csrf_token" value="{{ csrf_token() }}" />
+                <label for="quantity" class="hidden">Hidden Input</label>
+                <input type="hidden" id="quantity" name="quantity" value="1"/>
+                <label for="size" class="hidden">Hidden Input</label>
+                <input type="hidden" id="size" name="size" id="size-id"/>
+                <label for="product" class="hidden">Hidden Input</label>
+                <input type="hidden" id="product" name="product" value="{{ product.id }}"/>
+                <label for="action" class="hidden">Hidden Input</label>
+                <input type="hidden" id="action" name="action" value="add"/>
                 <button class="btn btn-primary btn-buynow btn-block btn-lg product-buy-now product-{{ product.id }}-buy-now-btn" type="button"{% if not product.can_buy_from_eshop() %}disabled{% endif %}
                 quantity="1" id="buy-now-btn">{{ _('Add to Cart') }}</button>
               </div>
@@ -177,9 +184,12 @@
           <div class="col-md-12 col-sm-12 col-xs-12 center" id="add-to-wishlist">
             <form method="post" action="{{ url_for('wishlist.wishlist.wishlist_product') }}" 
             autocomplete="off" style="display:inline-block">
-              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-              <input type="hidden" name="action" value="add"/>
-              <input type="hidden" name="product" value="{{ product.id }}" />
+              <label for="csrf_token" class="hidden">Hidden Input</label>
+              <input type="hidden" id="csrf_token" name="csrf_token" value="{{ csrf_token() }}" />
+              <label for="action" class="hidden">Hidden Input</label>
+              <input type="hidden" id="action" name="action" value="add"/>
+              <label for="produc" class="hidden">Hidden Input</label>
+              <input type="hidden" id="product" name="product" value="{{ product.id }}" />
               <div class="btn-group btn-block ">
                 {% if current_user.is_authenticated() %}
                 <button type="submit" class="btn btn-link wishlist_button_nopop">{{ _('Add To Wishlist') }}</button>
@@ -250,6 +260,7 @@
         <div class="related-product-images">
           <a href="{{ related_product.get_absolute_url() }}" ga-product-link data-ga-product-list="Related Products" data-ga-event-label="Product Thumbnail" data-ga-product-id="{{ related_product.id }}" data-ga-product-name="{{ related_product.name }}" data-ga-product-category="{{ related_product.category and related_product.category.name or None }}">
           <img src="{{ CDN }}{{ related_product.default_image.transform_command().thumbnail(200, 200, 'a') }}" class="img margin-auto" alt="{{ related_product.name }}">
+          <span class="hidden">Product thumbnail</span>
           </a>
         </div>
         <h4>
@@ -268,11 +279,16 @@
             {% else %}
               <form action="{{ url_for("nereid.cart.add_to_cart") }}" method="post" id="product-buy-now" autocomplete="off" class="form-related-inline related-products add-to-cart" data-ga-event-label="Add To Cart Related Product" data-ga-product-name="{{ related_product.name }}" data-ga-product-category="{{ related_product.category and related_product.category.name or None }}" data-ga-product-price="{{ related_product.sale_price()|currencyformat(request.nereid_currency.code) }}">
                 <div class="tooltip-bottom-{{ related_product.id }}">
-                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-                  <input type="hidden" name="quantity" value="1"/>
-                  <input type="hidden" name="size" id="size-id"/>
-                  <input type="hidden" name="product" value="{{ related_product.id }}"/>
-                  <input type="hidden" name="action" value="add"/>
+                  <label for="csrf_token" class="hidden">Hidden Input</label>
+                  <input type="hidden" id="csrf_token" name="csrf_token" value="{{ csrf_token() }}" />
+                  <label for="quantity" class="hidden">Hidden Input</label>
+                  <input type="hidden" id="quantity" name="quantity" value="1"/>
+                  <label for="size" class="hidden">Hidden Input</label>
+                  <input type="hidden" id="size" name="size" id="size-id"/>
+                  <label for="product" class="hidden">Hidden Input</label>
+                  <input type="hidden" id="product" name="product" value="{{ related_product.id }}"/>
+                  <label for="action" class="hidden">Hidden Input</label>
+                  <input type="hidden" id="action" name="action" value="add"/>
                   <button class="btn btn-related-item-add-cart product-buy-now product-{{ related_product.id }}-buy-now-btn" type="button" quantity="1" id="buy-now-btn">{{ _('Add to Cart') }}</button>
                 </div>
               </form>
@@ -307,7 +323,8 @@
     <% _.each(attrs, function(attr, index) { %>
       <% if (attr.widget == 'dropdown') { %>
         <div class="form-group"> {{ _('Select') }} <%= attr.display_name %>: <br/>
-          <select class="form-control select-sort attribute input-lg" data-attr-id="<%= attr.attribute_id %>">
+          <label for="some_select_input" class="hidden">Selection Input</label>
+          <select id="some_select_input"> class="form-control select-sort attribute input-lg" data-attr-id="<%= attr.attribute_id %>">
             <% _.each(attr.options, function(option, index) { %>
             <option value="<%= _.escape(option[0]) %>" <% if (option[0] == currentVariantAttrs[attr.attribute_id]) { %> selected <% } %> ><%= _.escape(option[1]) %></option>
             <% }); %>
@@ -332,6 +349,7 @@
       <div class="zoom-container">
         <a id="zoom-target" href="<%- url_collection.regular %>" data-lightbox="<%= variant.id %>" >
           <img class="zoom-image" src="<%- url_collection.large %>" alt="<%= variant.rec_name %>" />
+          <span class="hidden">Product Zoom Container</span>
         </a>
       </div>
     </div>
@@ -347,6 +365,7 @@
     <li class="<% if (index == 0) { %> active <% } %>">
       <a href="#tab<%= index %>" data-toggle="tab">
         <img src="<%- url_collection.thumbnail %>" alt="<%= variant.rec_name %>" />
+        <span class="hidden">Image Link</span>
       </a>
     </li>
   <%

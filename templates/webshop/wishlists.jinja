@@ -24,7 +24,8 @@
                   </div>
                   <form method="post" name="new_wishlist" action="" class="form-horizontal" autocomplete="off">
                     <div class="modal-body">
-                      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                      <label for="csrf_token" class="hidden">Hidden input</label>
+                      <input id="csrf_token" type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                         <label for="name">{{ _('Name') }}*:</label>
                         <input type="text" class="form-control" id="name" placeholder="Enter Name" name="name">
                     </div>
