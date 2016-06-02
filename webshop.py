@@ -4,9 +4,7 @@ import os
 from flask.helpers import send_from_directory
 from trytond.model import ModelSQL, fields
 from trytond.pool import Pool, PoolMeta
-from nereid import current_app, route, render_template, request, jsonify, \
-    template_filter
-from flask_babel import Locale, get_locale, format_currency
+from nereid import current_app, route, render_template, request, jsonify
 from trytond.pyson import Eval, Not
 
 __metaclass__ = PoolMeta
@@ -192,21 +190,6 @@ class Website:
 
         menu_item_id = ModelData.get_id("nereid_webshop", "cms_root_footer")
         return menu_item_id
-
-    @classmethod
-    @template_filter('fullcurrencyformat')
-    def fullcurrencyformat(cls, amount, code, format=None):
-        """
-        Format currency to include symbol and abbreviation.
-        ex- u'$ 199.00 USD'
-        """
-        locale = get_locale()
-        locale = Locale.parse(locale)
-        if not format:
-            format = locale.currency_formats.get(format)
-            if u'\xa4\xa4' not in format.pattern:
-                format.pattern += u' \xa4\xa4'
-        return format_currency(amount, code, format.pattern)
 
 
 class MenuItem:
