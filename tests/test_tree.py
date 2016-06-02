@@ -47,8 +47,6 @@ class TestTree(BaseTestCase):
                 'type': 'goods',
                 'category': category.id,
                 'default_uom': uom.id,
-                'list_price': 5000,
-                'cost_price': 4000,
                 'description': 'This is product 1',
             }])
             product, = self.Product.create([{
@@ -57,6 +55,8 @@ class TestTree(BaseTestCase):
                 'displayed_on_eshop': True,
                 'uri': 'test-product',
                 'active': True,
+                'list_price': 5000,
+                'cost_price': 4000,
             }])
 
             parent_node, = self.Node.create([{
@@ -102,8 +102,6 @@ class TestTree(BaseTestCase):
                 'type': 'goods',
                 'category': category.id,
                 'default_uom': uom.id,
-                'list_price': 5000,
-                'cost_price': 4000,
                 'description': 'This is product 1',
             }])
             product, = self.Product.create([{
@@ -111,6 +109,8 @@ class TestTree(BaseTestCase):
                 'code': 'code of product 1',
                 'displayed_on_eshop': True,
                 'uri': 'test-product',
+                'list_price': 5000,
+                'cost_price': 4000,
                 'active': True,
             }])
             node1, = self.Node.create([{

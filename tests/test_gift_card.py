@@ -1,10 +1,5 @@
-import os
 import unittest
 from decimal import Decimal
-
-if 'DB_NAME' not in os.environ:
-    os.environ['TRYTOND_CONFIG_URI'] = 'sqlite://'
-    os.environ['DB_NAME'] = ':memory:'
 
 import trytond.tests.test_tryton
 from trytond.tests.test_tryton import POOL, USER, DB_NAME, CONTEXT
@@ -32,15 +27,15 @@ class TestGiftCard(BaseTestCase):
         values = {
             'name': 'product',
             'type': type,
-            'list_price': Decimal('20'),
-            'cost_price': Decimal('5'),
             'default_uom': uom.id,
             'salable': True,
             'sale_uom': uom.id,
             'account_revenue': self._get_account_by_kind('revenue').id,
         }
         product_values = {
-            'code': 'Test Product'
+            'code': 'Test Product',
+            'list_price': Decimal('20'),
+            'cost_price': Decimal('5'),
         }
 
         if is_gift_card:
