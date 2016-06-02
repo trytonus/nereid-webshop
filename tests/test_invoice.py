@@ -1,55 +1,11 @@
 # -*- coding: utf-8 -*-
 import unittest
-import trytond.tests.test_tryton
 from trytond.tests.test_tryton import POOL, USER, DB_NAME, CONTEXT
 from trytond.transaction import Transaction
-from trytond.modules.nereid_cart_b2c.tests.test_product import BaseTestCase
+from test_base import BaseTestCase
 
 
 class TestDownloadInvoice(BaseTestCase):
-
-    def setUp(self):
-
-        trytond.tests.test_tryton.install_module(
-            'nereid_webshop'
-        )
-        super(TestDownloadInvoice, self).setUp()
-
-        self.UomCategory = POOL.get('product.uom.category')
-        self.Company = POOL.get('company.company')
-        self.Account = POOL.get('account.invoice')
-        self.AccountLine = POOL.get('account.invoice.line')
-        self.Category = POOL.get('product.category')
-        self.Node = POOL.get('product.tree_node')
-
-    def create_website(self):
-        """
-        Creates a website. Since the fields required to make this could
-        change depending on modules installed and this is a base test case
-        the creation is separated to another method
-        """
-        node, = self.Node.create([{
-            'name': 'root',
-            'slug': 'root',
-            'type_': 'catalog',
-        }])
-
-        return self.NereidWebsite.create([{
-            'name': 'localhost',
-            'channel': self.channel,
-            'company': self.company.id,
-            'application_user': USER,
-            'default_locale': self.locale_en_us.id,
-            'guest_user': self.guest_user,
-            'countries': [('add', self.available_countries)],
-            'currencies': [('add', [self.usd.id])],
-        }])
-
-    def setup_defaults(self):
-        """
-        Setting up default values.
-        """
-        super(TestDownloadInvoice, self).setup_defaults()
 
     def test_0010_download_invoice(self):
         """
@@ -59,11 +15,17 @@ class TestDownloadInvoice(BaseTestCase):
         SalePayment = POOL.get('sale.payment')
         PaymentGateway = POOL.get('payment_gateway.gateway')
         Journal = POOL.get('account.journal')
+        Invoice = POOL.get('account.invoice')
         SaleConfig = POOL.get('sale.configuration')
 
         with Transaction().start(DB_NAME, USER, CONTEXT):
             self.setup_defaults()
             app = self.get_app()
+
+            self.create_test_products()
+
+            template1, = self.Product.search([], limit=1)
+            product1, = template1.products
 
             party2, = self.Party.create([{
                 'name': 'Registered User',
@@ -105,10 +67,10 @@ class TestDownloadInvoice(BaseTestCase):
                 'currency': self.usd.id,
                 'lines': [
                     ('create', [{
-                        'product': self.product1.id,
+                        'product': product1.id,
                         'quantity': 1,
-                        'unit': self.template1.sale_uom.id,
-                        'unit_price': self.template1.list_price,
+                        'unit': template1.sale_uom.id,
+                        'unit_price': template1.list_price,
                         'description': 'description',
                     }])]
             }])
@@ -136,7 +98,7 @@ class TestDownloadInvoice(BaseTestCase):
             self.Sale.confirm([sale])
             with Transaction().set_context(company=self.company.id):
                 self.Sale.process([sale])
-                self.Account.post(sale.invoices)
+                Invoice.post(sale.invoices)
             with app.test_client() as c:
                 # Loged in user tries to download invoice
                 self.login(c, 'example@example.com', 'password')

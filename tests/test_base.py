@@ -11,6 +11,7 @@ from trytond.transaction import Transaction
 from trytond.config import config
 
 config.set('database', 'path', '/tmp')
+config.set('email', 'from', 'from@xyz.com')
 
 
 class BaseTestCase(NereidTestCase):
@@ -131,6 +132,8 @@ class BaseTestCase(NereidTestCase):
                     'uri': uri,
                     'displayed_on_eshop': displayed_on_eshop,
                     'code': code,
+                    'list_price': list_price,
+                    'cost_price': cost_price,
                 }])
             ]
         return self.ProductTemplate.create(vlist)[0]

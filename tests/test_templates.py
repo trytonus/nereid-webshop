@@ -21,7 +21,6 @@ class TestTemplates(BaseTestCase):
         setUp method
         """
         trytond.tests.test_tryton.install_module('nereid_catalog_variants')
-
         super(TestTemplates, self).setUp()
 
     def cart(self, to_login):
@@ -140,13 +139,13 @@ class TestTemplates(BaseTestCase):
                 'name': 'Product-1',
                 'category': self.category.id,
                 'type': 'goods',
-                'list_price': Decimal('10'),
-                'cost_price': Decimal('5'),
                 'default_uom': uom.id,
                 'products': [
                     ('create', [{
                         'uri': 'product-1',
-                        'displayed_on_eshop': True
+                        'displayed_on_eshop': True,
+                        'list_price': Decimal('10'),
+                        'cost_price': Decimal('5'),
                     }])
                 ]
             }
@@ -154,15 +153,17 @@ class TestTemplates(BaseTestCase):
             values2 = {
                 'name': 'Product-2',
                 'category': self.category.id,
-                'list_price': Decimal('10'),
-                'cost_price': Decimal('5'),
                 'default_uom': uom.id,
                 'products': [
                     ('create', [{
                         'uri': 'product-2',
+                        'list_price': Decimal('10'),
+                        'cost_price': Decimal('5'),
                         'displayed_on_eshop': True
                     }, {
                         'uri': 'product-21',
+                        'list_price': Decimal('10'),
+                        'cost_price': Decimal('5'),
                         'displayed_on_eshop': True
                     }])
                 ]
@@ -171,11 +172,11 @@ class TestTemplates(BaseTestCase):
             values3 = {
                 'name': 'Product-3',
                 'category': self.category.id,
-                'list_price': Decimal('10'),
-                'cost_price': Decimal('5'),
                 'default_uom': uom.id,
                 'products': [
                     ('create', [{
+                        'list_price': Decimal('10'),
+                        'cost_price': Decimal('5'),
                         'uri': 'product-3',
                         'displayed_on_eshop': True
                     }])
