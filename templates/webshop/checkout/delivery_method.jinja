@@ -12,31 +12,36 @@
         <div class="col-md-6 col-sm-7 col-xs-12">
           <div class="clearfix col-md-12 margin-bottom-25">
             <form method="post">
-              <h4><span>{{ _('Choose your Shipping Method') }}</span></h4>              
+              <h4><span>{{ _('Choose your Shipping Method') }}</span></h4>
               {% if delivery_rates %}
                 <div id="methods" data-field="shipping_method">
                   <div class="shipment">
-                    {% for method_name, rate, currency, metadata, write_vals in delivery_rates %}
+                    {% for rate in delivery_rates %}
                     <p class="shipping-method">
                       <label class="{% if loop.first %}current{% endif %}">
                         <span class="button">
-                          <input 
-                            type="radio" name="shipping_service_data" value='{{ write_vals }}'
+                          <input
+                            type="radio" name="carrier_json"
+                            value='{{ {
+                              "carrier": rate.carrier.id,
+                              "carrier_service": rate.carrier_service and rate.carrier_service.id,
+                              "cost": rate.cost,
+                              "cost_currency": rate.cost_currency.id,
+                              "display_name": rate.display_name,
+                              } | tojson|safe
+                            }}'
                             {{ 'checked' if loop.first else '' }}
                             />
                         </span>
                         <span class="info">
                           <span class="delivery-date">
-                            {{ method_name }}
+                            {{ rate.display_name }}
                           </span>
                           <span class="rate">
-                            {{ rate|currencyformat(currency.code) }}
-                            {% if metadata.get('duration') %}
-                            {{ metadata['duration'] }}
-                            {% endif %}
+                            {{ rate.cost|currencyformat(rate.cost_currency.code) }}
                           </span>
                         </span>
-                      </label>            
+                      </label>
                     </p>
                     {% endfor %}
                   </div>
