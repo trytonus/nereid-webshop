@@ -89,7 +89,7 @@ class Address:
                 country=address.country and address.country.id,
                 subdivision=address.subdivision and address.subdivision.id,
                 email=address.party.email,
-                phone=address.phone_number and address.phone_number.value
+                phone=address.phone
             )
         else:
             address_name = "" if request.nereid_user.is_anonymous() else \
