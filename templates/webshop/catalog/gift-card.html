@@ -12,9 +12,9 @@
   </h4>
   {% if product.allow_open_amount %}
     <div itemprop="offerDetails" itemscope itemtype="http://data-vocabulary.org/Offer">
-      <meta itemprop="priceCurrency" content="{{ request.nereid_currency.code }}" />
+      <meta itemprop="priceCurrency" content="{{ current_locale.currency.code }}" />
       <h4 class="product-price" itemprop="price">
-        {{ product.gc_min|currencyformat(request.nereid_currency.code) }} - {{ product.gc_max|currencyformat(request.nereid_currency.code) }}
+        {{ product.gc_min|currencyformat(current_locale.currency.code) }} - {{ product.gc_max|currencyformat(current_locale.currency.code) }}
       </h4>
     </div>
   {% endif %}

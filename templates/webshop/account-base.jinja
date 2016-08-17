@@ -28,7 +28,7 @@
             <a href="{{ url_for('party.address.view_address') }}">{{ _('Address Book') }}</a>
           </li>
         </div>
-        {% if current_user.is_authenticated() and request.nereid_website.save_payment_profile %}
+        {% if current_user.is_authenticated and current_website.save_payment_profile %}
         <li {% if active == 'my-cards' %}class="active"{% endif %}>
           <a href="{{ url_for('party.party.view_payment_profiles') }}">{{ _('My Cards') }}</a>
         </li>
