@@ -4,7 +4,7 @@
 {{ render_breadcrumb_item(_('Home'), url_for('nereid.website.home')) }}
 {% endblock breadcrumb %}
 
-{% set latest_products = request.nereid_website.latest_products_node and request.nereid_website.latest_products_node.get_products(per_page=24) %}
+{% set latest_products = current_website.latest_products_node and current_website.latest_products_node.get_products(per_page=24) %}
 
 {% block main %}
 
@@ -58,7 +58,7 @@
 
 <section class="products latest">
   <div class="container">
-    {% set homepage_menus = request.nereid_website.homepage_menu and request.nereid_website.homepage_menu.get_menu_item(max_depth=3).children %}
+    {% set homepage_menus = current_website.homepage_menu and current_website.homepage_menu.get_menu_item(max_depth=3).children %}
     {% if homepage_menus %}
       {% for child_menu in homepage_menus %}
         <div class="row section-spaces">
@@ -83,7 +83,7 @@
                     <h5 class="center">
                       <a href="{{ product.get_absolute_url() }}" ga-product-link="" data-ga-product-list="Homepage" data-ga-event-label="Product Name" data-ga-product-id="{{ product.id }}" data-ga-product-name="{{ product.name }}" data-ga-product-category="None">{{ product.name }}</a>
                     </h5>
-                  <h6 class="text-danger center">{{ product.sale_price(1) | currencyformat(request.nereid_currency.code) }}</h6> 
+                  <h6 class="text-danger center">{{ product.sale_price(1) | currencyformat(current_locale.currency.code) }}</h6> 
                   </div>
                 {% endif %}
 
