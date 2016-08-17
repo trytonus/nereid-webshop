@@ -5,7 +5,7 @@ from dateutil.relativedelta import relativedelta
 
 import pycountry
 import trytond.tests.test_tryton
-from trytond.tests.test_tryton import POOL, USER, CONTEXT
+from trytond.tests.test_tryton import POOL, USER
 from nereid.testing import NereidTestCase
 from trytond.transaction import Transaction
 from trytond.config import config
@@ -120,6 +120,8 @@ class BaseTestCase(NereidTestCase):
             _code_list.append(code)
 
         for values in vlist:
+            category = values.pop('category')
+            values['categories'] = [('add', [category])]
             values['name'] = name
             values['default_uom'], = self.Uom.search(
                 [('name', '=', uom)], limit=1
@@ -127,13 +129,13 @@ class BaseTestCase(NereidTestCase):
             values['sale_uom'], = self.Uom.search(
                 [('name', '=', uom)], limit=1
             )
+            values['list_price'] = list_price
+            values['cost_price'] = cost_price
             values['products'] = [
                 ('create', [{
                     'uri': uri,
                     'displayed_on_eshop': displayed_on_eshop,
                     'code': code,
-                    'list_price': list_price,
-                    'cost_price': cost_price,
                 }])
             ]
         return self.ProductTemplate.create(vlist)[0]
@@ -274,9 +276,10 @@ class BaseTestCase(NereidTestCase):
         account_create_chart = POOL.get(
             'account.create_chart', type="wizard")
 
-        account_template, = AccountTemplate.search(
-            [('parent', '=', None)]
-        )
+        account_template, = AccountTemplate.search([
+            ('parent', '=', None),
+            ('name', '=', 'Minimal Account Chart'),
+        ])
 
         session_id, _, _ = account_create_chart.create()
         create_chart = account_create_chart(session_id)
@@ -381,7 +384,9 @@ class BaseTestCase(NereidTestCase):
                 'company': self.company.id,
             }
         )
-        CONTEXT.update(self.User.get_preferences(context_only=True))
+        Transaction().context.update(
+            self.User.get_preferences(context_only=True)
+        )
 
         # Create Fiscal Year
         self._create_fiscal_year(company=self.company.id)

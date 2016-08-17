@@ -6,7 +6,7 @@ from jinja2.filters import do_striptags
 from werkzeug.exceptions import NotFound
 
 from nereid import jsonify, flash, request, url_for, route, redirect, \
-    render_template, abort
+    render_template, abort, current_locale
 from nereid.contrib.locale import make_lazy_gettext
 
 from forms import GiftCardForm
@@ -90,7 +90,7 @@ class Product:
                  "@type": "Offer",
                  "availability": "http://schema.org/InStock",
                  "price": str(sale_price),
-                 "priceCurrency": request.nereid_currency.code,
+                 "priceCurrency": current_locale.currency.code,
             },
             "image": self.default_image.transform_command().thumbnail(
                 500, 500, 'a').url(_external=True),
@@ -145,7 +145,7 @@ class Product:
             cart = Cart.open_cart(create_order=True)
 
             # Code to add gift card as a line to cart
-            values = {
+            order_line = SaleLine(**{
                 'product': product.id,
                 'sale': cart.sale.id,
                 'type': 'line',
@@ -156,18 +156,17 @@ class Product:
                 'recipient_email': form.recipient_email.data,
                 'recipient_name': form.recipient_name.data,
                 'message': form.message.data,
-            }
-            values.update(SaleLine(**values).on_change_product())
+            })
+            order_line.on_change_product()
 
             # Here 0 means the default option to enter open amount is
             # selected
             if form.selected_amount.data != 0:
-                values.update({'gc_price': form.selected_amount.data})
-                values.update(SaleLine(**values).on_change_gc_price())
+                order_line.gc_price = form.selected_amount.data
+                order_line.on_change_gc_price()
             else:
-                values.update({'unit_price': Decimal(form.open_amount.data)})
+                order_line.unit_price = Decimal(form.open_amount.data)
 
-            order_line = SaleLine(**values)
             order_line.save()
 
             message = _('Gift Card has been added to your cart')
