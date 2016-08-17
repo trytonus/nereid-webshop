@@ -57,9 +57,9 @@
       <span class="brand">{{ product.brand.rec_name }}</span>
     </h4>
     {% if product.is_gift_card %}
-      <span class="product-price">{{ product.gc_min|currencyformat(request.nereid_currency.code) }} - {{ product.gc_max|currencyformat(request.nereid_currency.code) }}</span>
+      <span class="product-price">{{ product.gc_min|currencyformat(current_locale.currency.code) }} - {{ product.gc_max|currencyformat(current_locale.currency.code) }}</span>
     {% else %}
-      <span class="product-price">{{ product.sale_price()|currencyformat(request.nereid_currency.code) }}</span>
+      <span class="product-price">{{ product.sale_price()|currencyformat(current_locale.currency.code) }}</span>
     {% endif %}
   </a>
 </div>
@@ -97,9 +97,9 @@
     </h5>
     {% if product.brand %}<div class="brand">{{ _('by') }} {{ product.brand.rec_name }}</div>{% endif %}
     {% if product.is_gift_card %}
-      <h6 class="text-danger center">{{ product.gc_min|currencyformat(request.nereid_currency.code) }} - {{ product.gc_max|currencyformat(request.nereid_currency.code) }}</h6>
+      <h6 class="text-danger center">{{ product.gc_min|currencyformat(current_locale.currency.code) }} - {{ product.gc_max|currencyformat(current_locale.currency.code) }}</h6>
     {% else %}
-      <h6 class="text-danger center">{{ product.sale_price()|currencyformat(request.nereid_currency.code) }}</h6>
+      <h6 class="text-danger center">{{ product.sale_price()|currencyformat(current_locale.currency.code) }}</h6>
     {% endif %}
   </div>
 </div>

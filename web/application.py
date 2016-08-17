@@ -13,7 +13,7 @@ CWD = os.path.abspath(os.path.dirname(__file__))
 CONFIG = dict(
 
     # The name of database
-    DATABASE_NAME=os.environ.get('TRYTOND_DB_NAME'),
+    DATABASE_NAME=os.environ.get('DB_NAME'),
 
     # If the application is to be configured in the debug mode
     DEBUG=True,

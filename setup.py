@@ -88,7 +88,6 @@ MODULE2PREFIX = {
     'gift_card': 'fio',
     'nereid_cms': 'fio',
     'nereid_shipping': 'fio',
-    'product_variant': 'fio',
 }
 
 MODULE = "nereid_webshop"
@@ -166,7 +165,7 @@ setup(
     tests_require=[
         'pycountry',
         get_required_version('fio_payment_gateway_authorize_net'),
-        get_required_version('openlabs_nereid_catalog_variants'),
+        get_required_version('fio_nereid_catalog_variants'),
         'cssutils',
     ],
     cmdclass={
