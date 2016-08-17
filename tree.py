@@ -35,7 +35,7 @@ class Node:
         """
         Return serialized menu_item for current treenode
         """
-        if self.product_as_menu_children:
+        if self.product_as_menu_children and self.display == 'product.product':
             return [
                 child.get_menu_item(max_depth=max_depth - 1)
                 for child in self.get_products()
