@@ -76,7 +76,8 @@
   <div class="row">
     <div class="col-md-12">
       <form action={{ url_for('sale.line.return_line', active_id=line.id) }} method="post" id="return-line" class="form-group">
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <label for="csrf_token" class="hidden">Hidden Input</label>
+        <input id="csrf_token" type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <div class="form-group">
           <div class="row">
             <div class="col-md-12">

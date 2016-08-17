@@ -74,6 +74,7 @@
     <!-- End Google Tag Manager -->
     {% endif %}
 
+
     {% block header %}
     <section class="header-main">
       {% block header_row_1 %}
@@ -203,7 +204,7 @@
                 itemprop="potentialAction" itemscope itemtype="http://schema.org/SearchAction">
                 <meta itemprop="target" content="{{ url_for('nereid.website.quick_search', _external=True) }}?q={q}"/>
                 <div id="search-bar">
-                  <input type="text" class="typeahead input-text typeahead search" data-provide="typeahead" name="q" itemprop="query-input" placeholder={{ _('Search') }} required>
+                  <input type="text" class="typeahead input-text typeahead search" aria-labelledby="Search input box" data-provide="typeahead" name="q" itemprop="query-input" placeholder={{ _('Search') }} required>
                     <button class="button fa-search search-btn" type="submit"></button>
                 </div><!-- /input-group -->
               </form>
@@ -245,7 +246,7 @@
         </nav>
         <div class="navbar-header pull-right">
           <a id="nav-expander" class="nav-expander fixed">
-            <i class="fa fa-bars fa-lg white"></i>
+            <i class="fa fa-bars fa-lg white"></i><span class="hidden">Expand Nav bar</span>
           </a>
         </div>
       </div>
@@ -278,9 +279,10 @@
               <!--Subscribe form-->
               <form autocomplete="off">
                 <div class="input-group">
-                  <input type="text" class="form-control" placeholder={{ _('you@mail.com') }}>
+                  <label for="news_letter_email" class="hidden">News Letter email address</label>
+                  <input id="news_letter_email" type="text" class="form-control" placeholder={{ _('you@mail.com') }}>
                   <span class="input-group-btn">
-                    <button class="btn btn-info" type="button"><i class="fa fa-plus"></i></button>
+                    <button class="btn btn-info" type="button"><i class="fa fa-plus"></i><span class="hidden">info button</span></button>
                   </span>
                 </div>
               </form>
@@ -324,25 +326,25 @@
             <h4>{{ _('Payment Gateway') }}</h4>
             <ul class="list-inline">
               <li>
-                <img src="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='images/payment-gateway/visa.png') }}">
+                <img src="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='images/payment-gateway/visa.png') }}" alt="Payment Gateways">
               </li>
               <li>
-                <img src="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='images/payment-gateway/paypal.png') }}">
+                <img src="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='images/payment-gateway/paypal.png') }}" alt="Payment Gateways">
               </li>
               <li>
-                <img src="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='images/payment-gateway/mastercard.png') }}">
+                <img src="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='images/payment-gateway/mastercard.png') }}" alt="Payment Gateways">
               </li>
               <li>
-                <img src="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='images/payment-gateway/solo.png') }}">
+                <img src="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='images/payment-gateway/solo.png') }}" alt="Payment Gateways">
               </li>
               <li>
-                <img src="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='images/payment-gateway/cirrus.png') }}">
+                <img src="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='images/payment-gateway/cirrus.png') }}" alt="Payment Gateways">
               </li>
               <li>
-                <img src="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='images/payment-gateway/western-union.png') }}">
+                <img src="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='images/payment-gateway/western-union.png') }}" alt="Payment Gateways">
               </li>
               <li>
-                <img src="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='images/payment-gateway/american-express.png') }}">
+                <img src="{{ CDN }}{{ url_for('nereid.webshop.send_static_file', filename='images/payment-gateway/american-express.png') }}" alt="Payment Gateways">
               </li>
             </ul>
           </div>
@@ -386,7 +388,8 @@
                 <div class="row">
                   <div class="col-xs-3 cart-product-image">
                     <a href="<%= line.url %>">
-                      <img src="<%= line.image %>" class="img-responsive">
+                      <img src="<%= line.image %>" class="img-responsive" alt="Product Image">
+                      <span class="hidden">Product Image</span>
                     </a>
                   </div>
                   <div class="col-xs-7 cart-product-name">

@@ -43,7 +43,8 @@
               <div class="col-md-6">
                 <div class="well well-small address_panel">
                   {{ render_address(address, edit=False) }}
-                  <input type="checkbox" class="select-address" value="{{ address.id }}" name="address">
+                  <label for="address_input" class="hidden">Address Input</label>
+                  <input id="address_input" type="checkbox" class="select-address" value="{{ address.id }}" name="address">
                     {{ _('Use this address') }}
                   </input>
                 </div>
