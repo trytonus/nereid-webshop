@@ -4,10 +4,10 @@
 {% set LOGO = CDN + url_for('nereid.webshop.send_static_file', filename='images/nereid_cart_logo.png') %}
 
 {% block notification_bar %}
-{% if request.nereid_website.show_site_message %}
+{% if current_website.show_site_message %}
 <div align="center" class="alert alert-warning hidden" id="site-message">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
-  {{ request.nereid_website.site_message }}
+  {{ current_website.site_message }}
 </div>
 {% endif %}
 {% endblock %}
@@ -20,7 +20,7 @@
   </li>
 {% endmacro %}
 
-<html lang="{{ request.nereid_language.code }}">
+<html lang="{{ current_locale.language.code }}">
   <head>
     <title>{% block title %}{% trans %}Nereid Webshop{% endtrans %}{% endblock title %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -86,14 +86,14 @@
                 {% block locales %}
                 <div class="col-xs-3">
                   <!-- Choose Language -->
-                  {% if request.nereid_website.locales %}
+                  {% if current_website.locales %}
                   {% set current_locale = request.nereid_locale.language %}
                   <div class="btn-group">
                     <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
                       <img class="flag flag-{{ current_locale.code[3:]|lower }}"> {{ current_locale.rec_name }}&nbsp;<span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                      {% for locale in request.nereid_website.locales + (request.nereid_website.default_locale,) %}
+                      {% for locale in current_website.locales + (current_website.default_locale,) %}
                         {% if locale.id != request.nereid_locale.id %}
                           <li>
                             <a href="{{url_for('nereid.website.home', locale=locale.code)}}">
@@ -110,15 +110,15 @@
                 <div class="col-xs-9 pull-right">
                   <ul class="list-inline pull-right links">
                     {% block header_links %}
-                    {% set company = request.nereid_website.company %}
+                    {% set company = current_website.company %}
                     <li>
                       {% if company.party.phone %}
                         <a href="tel:{{ company.party.phone }}">&nbsp;<i class="fa fa-phone"></i> &nbsp; {{ company.party.phone }}</a>
                       {% endif %}
                     </li>
                     <li>
-                      {% if not current_user.is_anonymous() %}
-                      <span class="text-muted">{{ _('Welcome') }} </span> <span >{{ request.nereid_user.display_name }}</span>
+                      {% if not current_user.is_anonymous %}
+                      <span class="text-muted">{{ _('Welcome') }} </span> <span >{{ current_user.display_name }}</span>
                       <a href="{{ url_for('nereid.website.logout') }}"><span class="text-danger"><i class="fa fa-sign-out"></i>{{ _('Log Out') }}</span>
                       </a>
                       {% else %}
@@ -142,7 +142,7 @@
             <div class="col-md-3 col-sm-3 col-xs-12">
               <div class="main-logo">
                 <a href="{{ url_for('nereid.website.home') }}">
-                  {% set company_logo=request.nereid_website.company.logo %}
+                  {% set company_logo=current_website.company.logo %}
                   <img src="{{ company_logo and company_logo.transform_command().resize(170, 57, 'a') or LOGO }}">
                 </a>
               </div>
@@ -159,7 +159,7 @@
                     </a>
                     <ul class="dropdown-menu" role="menu">
                     {% block render_account_menu %}
-                      {% if not current_user.is_anonymous() %}
+                      {% if not current_user.is_anonymous %}
                       {% block registered_menu %}
                         <li><a href="{{ url_for('nereid.website.account') }}">
                         <i class="fa fa-user"></i>&nbsp;&nbsp;{{ _('Profile') }}
@@ -217,7 +217,7 @@
       <!--Main Navigation -->
       {% block main_navigation %}
       {% from '_helpers.jinja' import render_cms_root_menu %}
-      {% set root_menu = request.nereid_website.cms_root_menu and render_cms_root_menu(request.nereid_website.cms_root_menu) %}
+      {% set root_menu = current_website.cms_root_menu and render_cms_root_menu(current_website.cms_root_menu) %}
       <div class="container sticky hidden-xs">
         {% if not checkout_page %}
         <div class="row main-navigation">
@@ -289,10 +289,10 @@
         </div>
         <hr>
         <!--First Row-->
-        {% if request.nereid_website.cms_root_footer %}
+        {% if current_website.cms_root_footer %}
           <div class="row text-center-xs">
             <!-- Site Navigation and root links -->
-            {% set footer_menuitem = request.nereid_website.cms_root_footer.get_menu_item(max_depth=10) %}
+            {% set footer_menuitem = current_website.cms_root_footer.get_menu_item(max_depth=10) %}
             {% for child in footer_menuitem.children %}
               <div class="col-md-2">
                 <h4>{{ child.title }}</h4>
@@ -352,7 +352,7 @@
         <div class="row copyright-footer">
           <ul class="list-inline center">
             <li>
-              &copy; {{ request.nereid_website.copyright_year_range or '' }} {{ request.nereid_website.company.rec_name }} &nbsp;&nbsp;&nbsp;/
+              &copy; {{ current_website.copyright_year_range or '' }} {{ current_website.company.rec_name }} &nbsp;&nbsp;&nbsp;/
             </li>
             <li><a href=""> {{ _('All Rights Reserved') }}</a>&nbsp;&nbsp;&nbsp;/</li>
             <li><a href=""> {{ _('Privacy Policy') }}</a>&nbsp;&nbsp;&nbsp;/</li>
@@ -666,7 +666,7 @@
       ga('create', {
         trackingId: '{{ GOOGLE_ANALYTICS_PROPERTY_ID }}',
         cookieDomain: 'auto'
-        {% if not current_user.is_anonymous() %}
+        {% if not current_user.is_anonymous %}
         ,userId: {{ current_user.id }}
         {% endif %}
       });

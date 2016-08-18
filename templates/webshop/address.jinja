@@ -17,7 +17,7 @@
         <div class="col-md-10">
           <div class="tab-content row">
             <div class="tab-pane active" id="saved-address">
-              {% for address in request.nereid_user.party.addresses %}
+              {% for address in current_user.party.addresses %}
               <div class="well well-small">
                 {{ render_address(address, _('Address # ') + loop.index|string) }}
               </div>
