@@ -395,7 +395,7 @@
                     <span class="text-muted"><%= line.quantity %> x <%= line.amount %></span>
                   </div>
                   <div class="col-xs-2 cart-product-total">
-                    <span data-url="<%= line.remove_url %>" title="{{ _('Remove') }}" class="remove_product" data-ga-event-label="Remove From Cart Hover" data-ga-product-name="<%= line.product.name %>" data-ga-product-category="<%= line.product.category %>" data-ga-product-price="<%= line.amount %>" data-ga-product-id="<%= line.product.id %>" data-ga-product-quantity="<%= line.quantity %>"><i class="fa fa-trash-o"></i></span>
+                    <span data-url="<%= line.remove_url %>" title="{{ _('Remove') }}" class="remove_product" data-ga-event-label="Remove From Cart Hover" data-ga-product-name="<%= line.product.name %>" data-ga-product-category="<%= line.product.account_category %>" data-ga-product-price="<%= line.amount %>" data-ga-product-id="<%= line.product.id %>" data-ga-product-quantity="<%= line.quantity %>"><i class="fa fa-trash-o"></i></span>
                   </div>
                 </div>
               </div>
