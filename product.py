@@ -157,6 +157,7 @@ class Product:
                 'recipient_email': form.recipient_email.data,
                 'recipient_name': form.recipient_name.data,
                 'message': form.message.data,
+                'warehouse': cart.sale.warehouse
             })
             order_line.on_change_product()
 
