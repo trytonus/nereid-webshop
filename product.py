@@ -63,7 +63,8 @@ class Product:
         rv = {
             'id': self.code or unicode(self.id),
             'name': self.name,
-            'category': self.category and self.category.name or None,
+            'category': self.account_category and
+                self.account_category.name or None,
         }
         rv.update(kwargs)
         return rv
