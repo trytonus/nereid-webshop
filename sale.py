@@ -15,7 +15,7 @@ class Sale:
         google analytics as a purchase confirmation
         '''
         return {
-            'id': self.reference,
+            'id': self.number,
             'revenue': str(self.total_amount),
             'tax': str(self.tax_amount),
         }
