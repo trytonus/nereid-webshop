@@ -17,7 +17,7 @@
     <br />
     Date: {{ sale.sale_date|dateformat }}
     <br />
-    Reference: #{{ sale.reference }}
+    Order Number: #{{ sale.number }}
     <br />
     Amount: {{ sale.total_amount|currencyformat(sale.currency.code) }}
     <br />

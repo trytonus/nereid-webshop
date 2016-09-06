@@ -1,7 +1,7 @@
 Dear {{ customer_name }},
 
 Date: {{ sale.sale_date|dateformat }}
-Reference: #{{ sale.reference }}
+Order Number: #{{ sale.number }}
 Amount: {{ sale.total_amount|currencyformat(sale.currency.code) }}
 
 Thank you for shopping with us.
