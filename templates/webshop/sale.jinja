@@ -18,10 +18,10 @@
     {% endblock sale_confirmation %}
 
       {% if not current_user.is_anonymous %}
-        {{ account_header(_('My Account / Order #') + (sale.reference or ''), 'orders') }}
+        {{ account_header(_('My Account / Order #') + (sale.number or ''), 'orders') }}
         <div class="col-md-10 no-pad-xs">
       {% else %}
-        <h4 class="text-center">{{ _('Order #') + (sale.reference or '')}}</h4>
+        <h4 class="text-center">{{ _('Order #') + (sale.number or '')}}</h4>
         <br>
         <div class="col-md-12">
       {% endif %}

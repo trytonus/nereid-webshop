@@ -54,7 +54,7 @@
                 <tbody>
                   <tr>
                     <td>{{ _('Order No.:') }}</td>
-                    <td><a href="{{ url_for('sale.sale.render', active_id=line.sale.id) }}" class="text-info">{{ _('#') }} {{ line.sale.reference }}</a></td>
+                    <td><a href="{{ url_for('sale.sale.render', active_id=line.sale.id) }}" class="text-info">{{ _('#') }} {{ line.sale.number }}</a></td>
                   </tr>
                   <tr>
                     <td>{{ _('Date:') }}</td>
