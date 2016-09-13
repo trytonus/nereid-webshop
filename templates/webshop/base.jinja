@@ -632,6 +632,10 @@
             delay:2000,
             animation: 'show'
           });
+          if (obj.redirect_to) {
+            // Redirect to page if specified
+            window.location = obj.redirect_to;
+          }
         });
       });
     </script>
