@@ -8,6 +8,7 @@ from werkzeug.exceptions import NotFound
 from nereid import jsonify, flash, request, url_for, route, redirect, \
     render_template, abort, current_locale
 from nereid.contrib.locale import make_lazy_gettext
+from nereid.ctx import has_request_context
 
 from forms import GiftCardForm
 
@@ -205,5 +206,5 @@ class Product:
             'record': self,
             'title': self.name,
             'image': self.default_image,
-            'link': self.get_absolute_url(),
+            'link': has_request_context() and self.get_absolute_url(),
         }
