@@ -598,6 +598,7 @@
         })
       });
     </script>
+    {% block product_buy_script %}
     <script type="text/javascript">
       $('.product-buy-now').on('click', function(e){
         var qty_element = $(this).siblings("input[name='quantity']");
@@ -639,6 +640,7 @@
         });
       });
     </script>
+    {% endblock product_buy_script %}
     <script>
       $(document).ready(function(){
         function resize_products () {
