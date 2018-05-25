@@ -163,6 +163,7 @@
   });
 {% endif %}
 
+{% block card_js %}
 $(function (){
   /*
    * Integrates card.js and sanitize form for backend
@@ -191,6 +192,7 @@ $(function (){
       .val(card.$numberInput[0].value.replace(/\s/g, ""));
   });
 });
+{% endblock card_js %}
 </script>
 {% endblock scripts %}
 
